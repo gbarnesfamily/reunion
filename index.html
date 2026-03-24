@@ -507,10 +507,20 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
 </div>
 
 <script>
-const ADMIN_PASSWORD='Barnes2026!';
+const ADMIN_PASSWORD='Reunion2026';
 const DEFAULT_VISIBILITY={home:false,countdown:false,details:false,schedule:false,legacy:false,rsvp:false,gallery:false};
 let visibility={},adminUnlocked=false,guestCount=0;
-function init(){const s=localStorage.getItem('barnes_visibility');visibility=s?JSON.parse(s):{...DEFAULT_VISIBILITY};applyVisibility();updateCountdown();setInterval(updateCountdown,1000);}
+function init(){
+  // Only show admin button if ?admin=true is in the URL
+  const isAdminMode=new URLSearchParams(window.location.search).get('admin')==='true';
+  const adminBtn=document.getElementById('admin-toggle-btn');
+  if(adminBtn) adminBtn.style.display=isAdminMode?'block':'none';
+  const s=localStorage.getItem('barnes_visibility');
+  visibility=s?JSON.parse(s):{...DEFAULT_VISIBILITY};
+  applyVisibility();
+  updateCountdown();
+  setInterval(updateCountdown,1000);
+}
 function applyVisibility(){const secs=['home','countdown','details','schedule','legacy','rsvp','gallery'];const any=secs.some(s=>visibility[s]);const ov=document.getElementById('coming-soon'),nv=document.getElementById('main-nav'),ft=document.getElementById('main-footer');if(!any){ov.classList.remove('hidden');nv.style.display='none';ft.style.display='none';}else{ov.classList.add('hidden');nv.style.display='flex';ft.style.display='block';}secs.forEach(id=>{const el=document.getElementById(id);if(!el)return;visibility[id]?el.classList.add('visible'):el.classList.remove('visible');const ni=document.getElementById('nav-'+id);if(ni)ni.classList.toggle('hidden-page',!visibility[id]);});const rb=document.getElementById('hero-rsvp-btn'),db=document.getElementById('hero-details-btn');if(rb)rb.style.display=visibility.rsvp?'inline-block':'none';if(db)db.style.display=visibility.details?'inline-block':'none';if(adminUnlocked)syncAdminToggles();}
 function toggleAdminPanel(){document.getElementById('admin-panel').classList.toggle('open');}
 function adminLogin(){const pw=document.getElementById('admin-pw').value,err=document.getElementById('admin-error');if(pw===ADMIN_PASSWORD){adminUnlocked=true;document.getElementById('admin-login-form').style.display='none';document.getElementById('admin-controls').style.display='block';syncAdminToggles();err.style.display='none';}else{err.style.display='block';document.getElementById('admin-pw').value='';}}
