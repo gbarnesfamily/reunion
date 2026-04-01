@@ -204,6 +204,18 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:ce
 .carousel-slide-placeholder .ph-label{font-family:'Montserrat',sans-serif;font-size:0.6rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-lt);}
 .carousel-caption{position:absolute;bottom:0;left:0;right:0;background:rgba(26,61,80,0.82);color:#fff;font-family:'Lato',sans-serif;font-size:0.78rem;padding:0.6rem 0.8rem;text-align:center;opacity:0;transition:opacity 0.2s;line-height:1.4;}
 .carousel-slide:hover .carousel-caption{opacity:1;}
+
+/* LIGHTBOX */
+.lightbox{display:none;position:fixed;inset:0;z-index:9500;background:rgba(0,0,0,0.88);align-items:center;justify-content:center;flex-direction:column;gap:1rem;padding:2rem;cursor:pointer;}
+.lightbox.open{display:flex;}
+.lightbox img{max-width:90vw;max-height:80vh;object-fit:contain;border-radius:4px;box-shadow:0 8px 40px rgba(0,0,0,0.5);}
+.lightbox-caption{color:rgba(255,255,255,0.85);font-family:'Lato',sans-serif;font-size:0.9rem;text-align:center;max-width:600px;line-height:1.5;}
+.lightbox-close{position:absolute;top:1.25rem;right:1.5rem;background:none;border:none;color:rgba(255,255,255,0.7);font-size:2rem;cursor:pointer;transition:color 0.2s;line-height:1;}
+.lightbox-close:hover{color:#fff;}
+.lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.15);border:none;color:#fff;font-size:1.5rem;width:44px;height:44px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.2s;}
+.lightbox-nav:hover{background:rgba(255,255,255,0.3);}
+.lightbox-prev{left:1rem;}
+.lightbox-next{right:1rem;}
 .gallery-submit-wrap{text-align:center;margin-top:2rem;}
 .gallery-submit-wrap p{font-size:0.88rem;color:var(--text-lt);margin-bottom:1rem;line-height:1.6;}
 .btn-gallery-submit{background:var(--navy);color:#fff;font-family:'Montserrat',sans-serif;font-size:0.68rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;padding:0.85rem 2rem;border-radius:2px;text-decoration:none;border:none;cursor:pointer;transition:all 0.25s;display:inline-block;}
@@ -283,11 +295,11 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
     <div class="hero-rule-bar"></div>
     <div class="hero-dates">
       <div class="hero-date-row">
-        <div class="hero-date-label green">Friday, July 10</div>
+        <div class="hero-date-label green">Friday, July 10 &nbsp;·&nbsp; 5:00 P.M.</div>
         <div class="hero-date-name">Kickoff Evening Activity</div>
       </div>
       <div class="hero-date-row">
-        <div class="hero-date-label gold">Saturday, July 11</div>
+        <div class="hero-date-label gold">Saturday, July 11 &nbsp;·&nbsp; 12:00 P.M.</div>
         <div class="hero-date-name">Family Reunion</div>
       </div>
     </div>
@@ -547,6 +559,15 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
   </div>
 </div>
 
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <button class="lightbox-close" onclick="closeLightbox(event)">&times;</button>
+  <button class="lightbox-nav lightbox-prev" onclick="lightboxNav(event,-1)">&#8592;</button>
+  <button class="lightbox-nav lightbox-next" onclick="lightboxNav(event,1)">&#8594;</button>
+  <img id="lightbox-img" src="" alt=""/>
+  <div class="lightbox-caption" id="lightbox-caption"></div>
+</div>
+
 <script>
 const ADMIN_PASSWORD='Reunion2026';
 const DEFAULT_VISIBILITY={home:true,countdown:false,details:true,schedule:true,legacy:true,rsvp:true,gallery:true};
@@ -655,6 +676,57 @@ init();
   } else {
     setTimeout(init, 100);
   }
+})();
+
+// ── Lightbox ──
+(function(){
+  let lightboxIndex = 0;
+
+  function getSlides(){
+    return [...document.querySelectorAll('.carousel-slide')].filter(s => s.querySelector('img'));
+  }
+
+  document.addEventListener('click', function(e){
+    const slide = e.target.closest('.carousel-slide');
+    if (!slide) return;
+    const img = slide.querySelector('img');
+    if (!img) return;
+    const slides = getSlides();
+    lightboxIndex = slides.indexOf(slide);
+    openLightbox(img.src, slide.querySelector('.carousel-caption')?.textContent || '');
+  });
+
+  function openLightbox(src, caption){
+    const lb = document.getElementById('lightbox');
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox-caption').textContent = caption;
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  window.closeLightbox = function(e){
+    if (e.target.closest('.lightbox-nav')) return;
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  };
+
+  window.lightboxNav = function(e, dir){
+    e.stopPropagation();
+    const slides = getSlides();
+    lightboxIndex = Math.max(0, Math.min(lightboxIndex + dir, slides.length - 1));
+    const slide = slides[lightboxIndex];
+    const img = slide.querySelector('img');
+    document.getElementById('lightbox-img').src = img.src;
+    document.getElementById('lightbox-caption').textContent = slide.querySelector('.carousel-caption')?.textContent || '';
+  };
+
+  document.addEventListener('keydown', function(e){
+    const lb = document.getElementById('lightbox');
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') { lb.classList.remove('open'); document.body.style.overflow = ''; }
+    if (e.key === 'ArrowLeft') window.lightboxNav(e, -1);
+    if (e.key === 'ArrowRight') window.lightboxNav(e, 1);
+  });
 })();
 </script>
 </body>
