@@ -202,8 +202,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:ce
 .carousel-slide:hover img{transform:scale(1.04);}
 .carousel-slide-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.5rem;background:var(--cream);}
 .carousel-slide-placeholder .ph-label{font-family:'Montserrat',sans-serif;font-size:0.6rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-lt);}
-.carousel-download{position:absolute;bottom:0;left:0;right:0;background:rgba(26,61,80,0.82);color:#fff;font-family:'Montserrat',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:0.6rem;text-align:center;opacity:0;transition:opacity 0.2s;text-decoration:none;display:block;}
-.carousel-slide:hover .carousel-download{opacity:1;}
+.carousel-caption{position:absolute;bottom:0;left:0;right:0;background:rgba(26,61,80,0.82);color:#fff;font-family:'Lato',sans-serif;font-size:0.78rem;padding:0.6rem 0.8rem;text-align:center;opacity:0;transition:opacity 0.2s;line-height:1.4;}
+.carousel-slide:hover .carousel-caption{opacity:1;}
+.gallery-submit-wrap{text-align:center;margin-top:2rem;}
+.gallery-submit-wrap p{font-size:0.88rem;color:var(--text-lt);margin-bottom:1rem;line-height:1.6;}
+.btn-gallery-submit{background:var(--navy);color:#fff;font-family:'Montserrat',sans-serif;font-size:0.68rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;padding:0.85rem 2rem;border-radius:2px;text-decoration:none;border:none;cursor:pointer;transition:all 0.25s;display:inline-block;}
+.btn-gallery-submit:hover{background:var(--navy-lt);transform:translateY(-2px);}
 .carousel-nav{display:flex;align-items:center;justify-content:center;gap:1rem;margin-top:1.25rem;}
 .carousel-btn{background:var(--cream);border:1px solid var(--border);border-radius:2px;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;color:var(--navy);transition:all 0.2s;}
 .carousel-btn:hover{background:var(--navy);color:var(--gold);border-color:var(--navy);}
@@ -340,11 +344,32 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
         <div class="details-item-label">Nearby Lodging</div>
         <div class="details-item-title">Hotel options near Erwin, NC</div>
         <div class="details-item-sub" style="margin-top:0.6rem;">
-          <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:0.5rem;">
-            <li>Hampton Inn by Hilton Dunn <span style="color:var(--text-lt);font-size:0.78rem;">— Dunn, NC (~5 mi)</span></li>
-            <li>Fairfield Inn &amp; Suites Dunn I-95 <span style="color:var(--text-lt);font-size:0.78rem;">— Dunn, NC (~5 mi)</span></li>
-            <li>Country Inn &amp; Suites by Radisson, Dunn <span style="color:var(--text-lt);font-size:0.78rem;">— Dunn, NC (~5 mi)</span></li>
-            <li>Microtel Inn &amp; Suites by Wyndham Lillington/Campbell University <span style="color:var(--text-lt);font-size:0.78rem;">— Lillington, NC (~10 mi)</span></li>
+          <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:1.25rem;">
+            <li>
+              <strong style="color:var(--navy);font-size:0.93rem;">Hampton Inn by Hilton Dunn</strong><br/>
+              <span style="font-size:0.82rem;">100 Jesse Tart Circle, Dunn, NC 28334</span><br/>
+              <span style="font-size:0.78rem;">Google Maps | Hotel Website</span><br/>
+              <span style="font-size:0.78rem;">Phone: (910) 892-4333</span>
+            </li>
+            <li>
+              <strong style="color:var(--navy);font-size:0.93rem;">Fairfield Inn &amp; Suites Dunn I-95</strong><br/>
+              <span style="font-size:0.82rem;">688 Jackson Road, Dunn, NC 28334</span><br/>
+              <span style="font-size:0.78rem;">Google Maps | Hotel Website</span><br/>
+              <span style="font-size:0.78rem;">Phone: (910) 891-4064</span>
+            </li>
+            <li>
+              <strong style="color:var(--navy);font-size:0.93rem;">Country Inn &amp; Suites by Radisson, Dunn</strong><br/>
+              <span style="font-size:0.82rem;">900 E Pearsall Street, Dunn, NC 28334</span><br/>
+              <span style="font-size:0.78rem;">Google Maps | Hotel Website</span><br/>
+              <span style="font-size:0.78rem;">Phone: (910) 304-0837</span>
+            </li>
+            <li>
+              <strong style="color:var(--navy);font-size:0.93rem;">Microtel Inn &amp; Suites by Wyndham Lillington/Campbell University</strong>
+              <span style="color:var(--text-lt);font-size:0.78rem;">(~10 miles)</span><br/>
+              <span style="font-size:0.82rem;">300 E Cornelius Harnett Blvd, Lillington, NC 27546</span><br/>
+              <span style="font-size:0.78rem;">Google Maps | Hotel Website</span><br/>
+              <span style="font-size:0.78rem;">Phone: (910) 893-2626</span>
+            </li>
           </ul>
         </div>
       </div>
@@ -364,13 +389,13 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
       </div>
       <div class="legacy-text">
         <span class="section-eye">Our Story</span>
-        <h2 class="section-h2">Ten Years of <em>Coming Together.</em></h2>
-        <p>The George Barnes Family Reunion began ten years ago with a simple but powerful vision. Mike Hicks, seeing how life and distance had scattered family members across the country, decided something had to be done. He wanted to bring everyone back together — not just for a day, but to build a tradition that would carry the family forward for generations.</p>
-        <p>What started as a gathering has grown into something much bigger. The reunion has become the place where cousins meet for the first time, where elders share stories that would otherwise be lost, and where the youngest members of the family learn who they are and where they come from.</p>
-        <p>In 2026, we celebrate our 10th reunion. This milestone belongs to every family member who has shown up, contributed, and kept the spirit alive — and to Mike, whose vision made it all possible.</p>
+        <h2 class="section-h2">15 Years of <em>Coming Together.</em></h2>
+        <p>The George Barnes Family Reunion began in 2012 with a simple but powerful vision. Mike Hicks, seeing how life and distance had scattered family members across the country, decided something had to be done. He wanted to bring everyone back together — not just for a day, but to build a tradition that would carry the family forward for generations.</p>
+        <p>What started as a gathering has grown into something much bigger. The reunion has become the place where cousins meet for the first time, where elders share stories that would otherwise be lost, and where the youngest members of the family learn who they are and where they come from. Even during the pandemic, the family stayed connected — gathering on Zoom to keep the tradition alive.</p>
+        <p>In 2026, we celebrate 15 years of reunion. This milestone belongs to every family member who has shown up, contributed, and kept the spirit alive — and to Mike, whose vision made it all possible.</p>
         <div class="legacy-stats">
           <div class="legacy-stat"><div class="legacy-stat-num">5+</div><div class="legacy-stat-lbl">Branches</div></div>
-          <div class="legacy-stat"><div class="legacy-stat-num">10th</div><div class="legacy-stat-lbl">Year</div></div>
+          <div class="legacy-stat"><div class="legacy-stat-num">15th</div><div class="legacy-stat-lbl">Year</div></div>
           <div class="legacy-stat"><div class="legacy-stat-num">∞</div><div class="legacy-stat-lbl">Memories</div></div>
         </div>
       </div>
@@ -386,7 +411,7 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
       <h2 class="section-h2">Will You Be <em>There?</em></h2>
     </div>
     <div id="rsvp-success"><h3>You're on the List!</h3><p>Your RSVP has been received. We'll be in touch with more details soon. Can't wait to see you — July 10–11 in Erwin, NC!</p></div>
-    <form id="rsvp-form" action="https://script.google.com/macros/s/AKfycbzXoCHQQ4FOcHBKq2zNTzKTXg1-2mey90MKO5yik_NNFAPeUDooakM7bFa9_mHCNDjoKQ/exec" method="POST" novalidate>
+    <form id="rsvp-form" action="https://script.google.com/macros/s/AKfycbzPT9F2Gvy1jguovBdfQpSJDdaBJ-WSMnM7FDdacKDf3X4YnSsnWZ8VIclRc6vJsFVMEg/exec" method="POST" novalidate>
       <div class="rsvp-form-wrap">
         <div class="form-card">
           <div class="form-card-title"><span class="num">1</span> Your Information</div>
@@ -454,28 +479,25 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
     <div class="section-header">
       <span class="section-eye">Memories</span>
       <h2 class="section-h2">Good Times, <em>Always</em></h2>
-      <p class="section-sub">Browse reunion photos — click any image to download and keep.</p>
+      <p class="section-sub">Browse reunion photos from over the years.</p>
     </div>
     <div class="carousel-wrap">
       <div class="carousel-track-outer">
         <div class="carousel-track" id="carousel-track">
-          <!-- 2016 reunion photo -->
+          <!-- Static photos -->
           <div class="carousel-slide">
             <img src="images/reunion-2016.jpg" alt="Family Reunion 2016"/>
-            <a class="carousel-download" href="images/reunion-2016.jpg" download="Barnes-Reunion-2016.jpg">Download Photo</a>
+            <div class="carousel-caption">Family Reunion 2016</div>
           </div>
-          <!-- Placeholder slides — add real photos here -->
           <div class="carousel-slide">
             <img src="images/barnes-family-1.jpg" alt="Barnes Family"/>
-            <a class="carousel-download" href="images/barnes-family-1.jpg" download="Barnes-Family-Photo.jpg">Download Photo</a>
+            <div class="carousel-caption">Barnes Family</div>
           </div>
           <div class="carousel-slide">
             <img src="images/barnes-family-2.jpg" alt="Barnes Family"/>
-            <a class="carousel-download" href="images/barnes-family-2.jpg" download="Barnes-Family-Photo-2.jpg">Download Photo</a>
+            <div class="carousel-caption">Barnes Family</div>
           </div>
-          <div class="carousel-slide"><div class="carousel-slide-placeholder"><span style="font-size:2rem;opacity:0.25;">📷</span><span class="ph-label">Add Photo</span></div></div>
-          <div class="carousel-slide"><div class="carousel-slide-placeholder"><span style="font-size:2rem;opacity:0.25;">📷</span><span class="ph-label">Add Photo</span></div></div>
-          <div class="carousel-slide"><div class="carousel-slide-placeholder"><span style="font-size:2rem;opacity:0.25;">📷</span><span class="ph-label">Add Photo</span></div></div>
+          <!-- Approved photos from Google Sheet load here -->
         </div>
       </div>
       <div class="carousel-nav">
@@ -483,7 +505,10 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
         <div class="carousel-dots" id="carousel-dots"></div>
         <button class="carousel-btn" id="carousel-next" onclick="carouselNext()">&#8594;</button>
       </div>
-      <p class="gallery-upload-note"><strong>To add more photos:</strong> Replace the placeholder slides in the HTML with &lt;img&gt; tags pointing to your photos, and update the download link for each one.</p>
+      <div class="gallery-submit-wrap">
+        <p>Have a photo to share? Submit it and we'll add it to the gallery after review.</p>
+        <a class="btn-gallery-submit" id="gallery-submit-link" href="https://docs.google.com/forms/d/1BWGbi_YmpA8xeEONwgSVlhYsChtE-I0shcLJahE20cY/viewform" target="_blank">Submit a Photo</a>
+      </div>
     </div>
   </div>
 </section>
@@ -559,6 +584,29 @@ init();
   const dotsEl = document.getElementById('carousel-dots');
   let current = 0;
 
+  // ── Load approved photos from Google Sheet ──
+  // Set this to your published Google Apps Script web app URL
+  const GALLERY_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxL-oie4zV-VFtqM6NQv-snsG3A4lupfq4CBKcqK7zGin7NlV2Vyowlyux2zcY-XjPhKg/exec';
+
+  function loadApprovedPhotos(){
+    if (!GALLERY_SCRIPT_URL) return;
+    fetch(GALLERY_SCRIPT_URL)
+      .then(r => r.json())
+      .then(photos => {
+        photos.forEach(p => {
+          const slide = document.createElement('div');
+          slide.className = 'carousel-slide';
+          slide.innerHTML =
+            '<img src="' + p.url + '" alt="' + (p.caption || 'Family Photo') + '"/>' +
+            '<div class="carousel-caption">' + (p.caption || '') + (p.submitted_by ? '<br/>Photo by ' + p.submitted_by : '') + '</div>';
+          track.appendChild(slide);
+        });
+        buildDots();
+        goTo(0);
+      })
+      .catch(() => {});
+  }
+
   function slidesPerView(){
     return window.innerWidth <= 640 ? 1 : 3;
   }
@@ -598,10 +646,10 @@ init();
   function init(){
     buildDots();
     goTo(0);
+    loadApprovedPhotos();
   }
 
   window.addEventListener('resize', () => { buildDots(); goTo(0); });
-  // Init after DOM is ready
   if (document.readyState === 'loading'){
     document.addEventListener('DOMContentLoaded', init);
   } else {
