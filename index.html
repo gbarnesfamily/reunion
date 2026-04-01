@@ -202,8 +202,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:ce
 .carousel-slide:hover img{transform:scale(1.04);}
 .carousel-slide-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.5rem;background:var(--cream);}
 .carousel-slide-placeholder .ph-label{font-family:'Montserrat',sans-serif;font-size:0.6rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-lt);}
-.carousel-download{position:absolute;bottom:0;left:0;right:0;background:rgba(26,61,80,0.82);color:#fff;font-family:'Montserrat',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:0.6rem;text-align:center;opacity:0;transition:opacity 0.2s;text-decoration:none;display:block;}
-.carousel-slide:hover .carousel-download{opacity:1;}
+.carousel-caption{position:absolute;bottom:0;left:0;right:0;background:rgba(26,61,80,0.82);color:#fff;font-family:'Lato',sans-serif;font-size:0.78rem;padding:0.6rem 0.8rem;text-align:center;opacity:0;transition:opacity 0.2s;line-height:1.4;}
+.carousel-slide:hover .carousel-caption{opacity:1;}
+.gallery-submit-wrap{text-align:center;margin-top:2rem;}
+.gallery-submit-wrap p{font-size:0.88rem;color:var(--text-lt);margin-bottom:1rem;line-height:1.6;}
+.btn-gallery-submit{background:var(--navy);color:#fff;font-family:'Montserrat',sans-serif;font-size:0.68rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;padding:0.85rem 2rem;border-radius:2px;text-decoration:none;border:none;cursor:pointer;transition:all 0.25s;display:inline-block;}
+.btn-gallery-submit:hover{background:var(--navy-lt);transform:translateY(-2px);}
 .carousel-nav{display:flex;align-items:center;justify-content:center;gap:1rem;margin-top:1.25rem;}
 .carousel-btn{background:var(--cream);border:1px solid var(--border);border-radius:2px;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;color:var(--navy);transition:all 0.2s;}
 .carousel-btn:hover{background:var(--navy);color:var(--gold);border-color:var(--navy);}
@@ -475,28 +479,25 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
     <div class="section-header">
       <span class="section-eye">Memories</span>
       <h2 class="section-h2">Good Times, <em>Always</em></h2>
-      <p class="section-sub">Browse reunion photos — click any image to download and keep.</p>
+      <p class="section-sub">Browse reunion photos from over the years.</p>
     </div>
     <div class="carousel-wrap">
       <div class="carousel-track-outer">
         <div class="carousel-track" id="carousel-track">
-          <!-- 2016 reunion photo -->
+          <!-- Static photos -->
           <div class="carousel-slide">
             <img src="images/reunion-2016.jpg" alt="Family Reunion 2016"/>
-            <a class="carousel-download" href="images/reunion-2016.jpg" download="Barnes-Reunion-2016.jpg">Download Photo</a>
+            <div class="carousel-caption">Family Reunion 2016</div>
           </div>
-          <!-- Placeholder slides — add real photos here -->
           <div class="carousel-slide">
             <img src="images/barnes-family-1.jpg" alt="Barnes Family"/>
-            <a class="carousel-download" href="images/barnes-family-1.jpg" download="Barnes-Family-Photo.jpg">Download Photo</a>
+            <div class="carousel-caption">Barnes Family</div>
           </div>
           <div class="carousel-slide">
             <img src="images/barnes-family-2.jpg" alt="Barnes Family"/>
-            <a class="carousel-download" href="images/barnes-family-2.jpg" download="Barnes-Family-Photo-2.jpg">Download Photo</a>
+            <div class="carousel-caption">Barnes Family</div>
           </div>
-          <div class="carousel-slide"><div class="carousel-slide-placeholder"><span style="font-size:2rem;opacity:0.25;">📷</span><span class="ph-label">Add Photo</span></div></div>
-          <div class="carousel-slide"><div class="carousel-slide-placeholder"><span style="font-size:2rem;opacity:0.25;">📷</span><span class="ph-label">Add Photo</span></div></div>
-          <div class="carousel-slide"><div class="carousel-slide-placeholder"><span style="font-size:2rem;opacity:0.25;">📷</span><span class="ph-label">Add Photo</span></div></div>
+          <!-- Approved photos from Google Sheet load here -->
         </div>
       </div>
       <div class="carousel-nav">
@@ -504,7 +505,10 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
         <div class="carousel-dots" id="carousel-dots"></div>
         <button class="carousel-btn" id="carousel-next" onclick="carouselNext()">&#8594;</button>
       </div>
-      <p class="gallery-upload-note"><strong>To add more photos:</strong> Replace the placeholder slides in the HTML with &lt;img&gt; tags pointing to your photos, and update the download link for each one.</p>
+      <div class="gallery-submit-wrap">
+        <p>Have a photo to share? Submit it and we'll add it to the gallery after review.</p>
+        <a class="btn-gallery-submit" id="gallery-submit-link" href="#" target="_blank">Submit a Photo</a>
+      </div>
     </div>
   </div>
 </section>
@@ -580,6 +584,29 @@ init();
   const dotsEl = document.getElementById('carousel-dots');
   let current = 0;
 
+  // ── Load approved photos from Google Sheet ──
+  // Set this to your published Google Apps Script web app URL
+  const GALLERY_SCRIPT_URL = '';
+
+  function loadApprovedPhotos(){
+    if (!GALLERY_SCRIPT_URL) return;
+    fetch(GALLERY_SCRIPT_URL)
+      .then(r => r.json())
+      .then(photos => {
+        photos.forEach(p => {
+          const slide = document.createElement('div');
+          slide.className = 'carousel-slide';
+          slide.innerHTML =
+            '<img src="' + p.url + '" alt="' + (p.caption || 'Family Photo') + '"/>' +
+            '<div class="carousel-caption">' + (p.caption || '') + (p.submitted_by ? '<br/>Photo by ' + p.submitted_by : '') + '</div>';
+          track.appendChild(slide);
+        });
+        buildDots();
+        goTo(0);
+      })
+      .catch(() => {});
+  }
+
   function slidesPerView(){
     return window.innerWidth <= 640 ? 1 : 3;
   }
@@ -619,10 +646,10 @@ init();
   function init(){
     buildDots();
     goTo(0);
+    loadApprovedPhotos();
   }
 
   window.addEventListener('resize', () => { buildDots(); goTo(0); });
-  // Init after DOM is ready
   if (document.readyState === 'loading'){
     document.addEventListener('DOMContentLoaded', init);
   } else {
