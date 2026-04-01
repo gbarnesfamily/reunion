@@ -289,7 +289,7 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
     </div>
     <p class="hero-location">Erwin, North Carolina</p>
     <div class="hero-btns">
-      <a href="#rsvp" class="btn-primary" id="hero-rsvp-btn">Reserve Your Spot</a>
+      <a href="#rsvp" class="btn-primary" id="hero-rsvp-btn">RSVP</a>
       <a href="#details" class="btn-outline" id="hero-details-btn">Event Details</a>
     </div>
 
@@ -321,25 +321,32 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
       <div class="details-item">
         <div class="details-item-label">Kickoff Evening</div>
         <div class="details-item-title">Friday, July 10, 2026</div>
-        <div class="details-item-time">Time: TBD</div>
+        <div class="details-item-time">Time: 5:00 P.M.</div>
       </div>
 
       <div class="details-item">
         <div class="details-item-label">Main Reunion</div>
         <div class="details-item-title">Saturday, July 11, 2026</div>
-        <div class="details-item-time">Time: TBD</div>
+        <div class="details-item-time">Time: 12:00 P.M.</div>
       </div>
 
       <div class="details-item">
         <div class="details-item-label">Location</div>
-        <div class="details-item-title">Erwin, North Carolina</div>
-        <div class="details-item-sub">Exact venue details will be included in your RSVP confirmation.</div>
+        <div class="details-item-title">The Home of Mike and Janice Hicks</div>
+        <div class="details-item-sub">Erwin, North Carolina<br/>Exact venue details will be shared as we get closer to the event.</div>
       </div>
 
       <div class="details-item details-item-lodging">
         <div class="details-item-label">Nearby Lodging</div>
         <div class="details-item-title">Hotel options near Erwin, NC</div>
-        <div class="details-item-sub">We are working on a list of nearby hotels and accommodations for out-of-town family. Check back soon for recommendations, and watch for updates in your RSVP confirmation email.</div>
+        <div class="details-item-sub" style="margin-top:0.6rem;">
+          <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:0.5rem;">
+            <li>Hampton Inn by Hilton Dunn <span style="color:var(--text-lt);font-size:0.78rem;">— Dunn, NC (~5 mi)</span></li>
+            <li>Fairfield Inn &amp; Suites Dunn I-95 <span style="color:var(--text-lt);font-size:0.78rem;">— Dunn, NC (~5 mi)</span></li>
+            <li>Country Inn &amp; Suites by Radisson, Dunn <span style="color:var(--text-lt);font-size:0.78rem;">— Dunn, NC (~5 mi)</span></li>
+            <li>Microtel Inn &amp; Suites by Wyndham Lillington/Campbell University <span style="color:var(--text-lt);font-size:0.78rem;">— Lillington, NC (~10 mi)</span></li>
+          </ul>
+        </div>
       </div>
 
     </div>
@@ -375,9 +382,8 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
 <section class="site-section" id="rsvp">
   <div class="section-wrap">
     <div class="rsvp-intro" id="rsvp-intro">
-      <span class="section-eye">RSVP &amp; Registration</span>
+      <span class="section-eye">RSVP</span>
       <h2 class="section-h2">Will You Be <em>There?</em></h2>
-      <p class="section-sub">Let us know you're coming so we can celebrate together.</p>
     </div>
     <div id="rsvp-success"><h3>You're on the List!</h3><p>Your RSVP has been received. We'll be in touch with more details soon. Can't wait to see you — July 10–11 in Erwin, NC!</p></div>
     <form id="rsvp-form" action="https://script.google.com/macros/s/AKfycbzXoCHQQ4FOcHBKq2zNTzKTXg1-2mey90MKO5yik_NNFAPeUDooakM7bFa9_mHCNDjoKQ/exec" method="POST" novalidate>
@@ -390,7 +396,7 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
           </div>
           <div class="form-row">
             <div class="form-field" id="ff-email"><label>Email <span class="req">*</span></label><input type="email" name="email" placeholder="your@email.com"/><span class="field-error">Valid email required</span></div>
-            <div class="form-field"><label>Phone</label><input type="tel" name="phone" placeholder="(555) 000-0000"/></div>
+            <div class="form-field" id="ff-phone"><label>Phone <span class="req">*</span></label><input type="tel" name="phone" placeholder="(555) 000-0000"/><span class="field-error">Required</span></div>
           </div>
           <div class="sms-optin-box">
             <input type="checkbox" id="sms-optin" name="sms_optin" value="Yes"/>
@@ -422,7 +428,17 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
           <div id="guest-list"></div>
         </div>
         <div class="form-card">
-          <div class="form-card-title"><span class="num">3</span> Anything Else?</div>
+          <div class="form-card-title"><span class="num">3</span> Volunteer for a Committee</div>
+          <p style="font-size:0.88rem;color:var(--text-lt);line-height:1.6;margin-bottom:1rem;">Interested in helping out? Select any committees you'd like to join.</p>
+          <div style="display:flex;flex-direction:column;gap:0.6rem;">
+            <label style="display:flex;align-items:center;gap:0.6rem;font-size:0.88rem;color:var(--text);cursor:pointer;"><input type="checkbox" name="committee" value="Activities" style="width:16px;height:16px;accent-color:var(--navy);"/> Activities</label>
+            <label style="display:flex;align-items:center;gap:0.6rem;font-size:0.88rem;color:var(--text);cursor:pointer;"><input type="checkbox" name="committee" value="Communications" style="width:16px;height:16px;accent-color:var(--navy);"/> Communications</label>
+            <label style="display:flex;align-items:center;gap:0.6rem;font-size:0.88rem;color:var(--text);cursor:pointer;"><input type="checkbox" name="committee" value="Family History" style="width:16px;height:16px;accent-color:var(--navy);"/> Family History</label>
+            <label style="display:flex;align-items:center;gap:0.6rem;font-size:0.88rem;color:var(--text);cursor:pointer;"><input type="checkbox" name="committee" value="Setup & Break Down" style="width:16px;height:16px;accent-color:var(--navy);"/> Setup &amp; Break Down</label>
+          </div>
+        </div>
+        <div class="form-card">
+          <div class="form-card-title"><span class="num">4</span> Anything Else?</div>
           <div class="form-field"><label>Dietary Restrictions / Special Needs</label><textarea name="dietary" placeholder="e.g. gluten-free, nut allergy, wheelchair seating needed…"></textarea></div>
           <div class="form-field"><label>Message to the Family</label><textarea name="message" placeholder="Share a memory, a shoutout, or just say hello!"></textarea></div>
         </div>
@@ -481,7 +497,7 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
     <li><a href="#schedule">Schedule</a></li><li><a href="#legacy">Our Legacy</a></li>
     <li><a href="#gallery">Gallery</a></li><li><a href="#rsvp">RSVP</a></li>
   </ul>
-  <p class="footer-copy">© 2026 George Barnes Family Reunion Committee &nbsp;·&nbsp; Erwin, NC &nbsp;·&nbsp; Made with love</p>
+  <p class="footer-copy">© 2026 George Barnes Family Reunion Committee</p>
 </footer>
 
 <button id="admin-toggle-btn" onclick="toggleAdminPanel()">⚙ Admin</button>
@@ -533,7 +549,7 @@ function changeGuests(delta){const n=guestCount+delta;if(n<0||n>10)return;delta>
 function addGuestCard(n){const list=document.getElementById('guest-list'),card=document.createElement('div');card.className='guest-card';card.dataset.n=n;card.innerHTML=`<div class="guest-card-head"><span class="guest-card-title">Guest ${n}</span><button type="button" class="remove-guest" onclick="removeGuest(${n})">✕</button></div><div class="form-row"><div class="form-field" id="gf-name-${n}"><label>Full Name <span class="req">*</span></label><input type="text" name="guest_${n}_name" placeholder="First Last"/><span class="field-error">Required</span></div><div class="form-field"><label>Age 13 or under?</label><select name="guest_${n}_child"><option value="">— Select —</option><option>No</option><option>Yes</option></select></div></div>`;list.appendChild(card);}
 function removeLastGuest(){const cards=document.getElementById('guest-list').querySelectorAll('.guest-card');if(cards.length)cards[cards.length-1].remove();}
 function removeGuest(n){document.querySelector(`.guest-card[data-n="${n}"]`)?.remove();guestCount--;document.getElementById('guest-count').textContent=guestCount;document.getElementById('guest-dec').disabled=guestCount===0;document.getElementById('guest-inc').disabled=guestCount===10;document.querySelectorAll('.guest-card').forEach((c,i)=>c.querySelector('.guest-card-title').textContent=`Guest ${i+1}`);}
-document.getElementById('rsvp-form').addEventListener('submit',async function(e){e.preventDefault();let valid=true;[{id:'ff-first',field:'first_name',type:'text'},{id:'ff-last',field:'last_name',type:'text'},{id:'ff-email',field:'email',type:'email'}].forEach(r=>{const el=this.querySelector(`[name="${r.field}"]`),wrap=document.getElementById(r.id);let ok=el.value.trim()!=='';if(r.type==='email')ok=ok&&/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value);wrap.classList.toggle('has-error',!ok);if(!ok)valid=false;});document.querySelectorAll('.guest-card').forEach(card=>{const n=card.dataset.n,nameEl=card.querySelector(`[name="guest_${n}_name"]`),wrap=document.getElementById(`gf-name-${n}`);if(nameEl&&wrap){const ok=nameEl.value.trim()!=='';wrap.classList.toggle('has-error',!ok);if(!ok)valid=false;}});if(!valid){document.querySelector('.has-error')?.scrollIntoView({behavior:'smooth',block:'center'});return;}const btn=this.querySelector('.rsvp-submit');btn.textContent='Sending…';btn.disabled=true;const guestParts=[];document.querySelectorAll('.guest-card').forEach(card=>{const n=card.dataset.n,name=card.querySelector(`[name="guest_${n}_name"]`)?.value||'',child=card.querySelector(`[name="guest_${n}_child"]`)?.value||'';if(name)guestParts.push(name+(child==='Yes'?' (child)':''));});const params=new URLSearchParams({first_name:this.querySelector('[name="first_name"]').value,last_name:this.querySelector('[name="last_name"]').value,email:this.querySelector('[name="email"]').value,phone:this.querySelector('[name="phone"]').value,sms_optin:this.querySelector('[name="sms_optin"]')?.checked?'Yes':'No',city:this.querySelector('[name="city"]').value,state:this.querySelector('[name="state"]').value,attendance:this.querySelector('[name="attendance"]:checked')?.value||'',guest_count:String(guestCount),total_registrants:String(this.querySelector('[name="attendance"]:checked')?.value==='Yes'?1+guestCount:0),guests:guestParts.join(' | '),dietary:this.querySelector('[name="dietary"]').value,message:this.querySelector('[name="message"]').value});try{await fetch(this.action,{method:'POST',body:params,headers:{'Content-Type':'application/x-www-form-urlencoded'},mode:'no-cors'});this.style.display='none';document.getElementById('rsvp-intro').style.display='none';document.getElementById('rsvp-success').style.display='block';window.scrollTo({top:document.getElementById('rsvp').offsetTop-80,behavior:'smooth'});}catch(err){btn.textContent='Send My RSVP ✦';btn.disabled=false;alert('Something went wrong. Please try again.');}}); 
+document.getElementById('rsvp-form').addEventListener('submit',async function(e){e.preventDefault();let valid=true;[{id:'ff-first',field:'first_name',type:'text'},{id:'ff-last',field:'last_name',type:'text'},{id:'ff-email',field:'email',type:'email'},{id:'ff-phone',field:'phone',type:'text'}].forEach(r=>{const el=this.querySelector(`[name="${r.field}"]`),wrap=document.getElementById(r.id);let ok=el.value.trim()!=='';if(r.type==='email')ok=ok&&/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value);wrap.classList.toggle('has-error',!ok);if(!ok)valid=false;});document.querySelectorAll('.guest-card').forEach(card=>{const n=card.dataset.n,nameEl=card.querySelector(`[name="guest_${n}_name"]`),wrap=document.getElementById(`gf-name-${n}`);if(nameEl&&wrap){const ok=nameEl.value.trim()!=='';wrap.classList.toggle('has-error',!ok);if(!ok)valid=false;}});if(!valid){document.querySelector('.has-error')?.scrollIntoView({behavior:'smooth',block:'center'});return;}const btn=this.querySelector('.rsvp-submit');btn.textContent='Sending…';btn.disabled=true;const guestParts=[];document.querySelectorAll('.guest-card').forEach(card=>{const n=card.dataset.n,name=card.querySelector(`[name="guest_${n}_name"]`)?.value||'',child=card.querySelector(`[name="guest_${n}_child"]`)?.value||'';if(name)guestParts.push(name+(child==='Yes'?' (child)':''));});const params=new URLSearchParams({first_name:this.querySelector('[name="first_name"]').value,last_name:this.querySelector('[name="last_name"]').value,email:this.querySelector('[name="email"]').value,phone:this.querySelector('[name="phone"]').value,sms_optin:this.querySelector('[name="sms_optin"]')?.checked?'Yes':'No',city:this.querySelector('[name="city"]').value,state:this.querySelector('[name="state"]').value,attendance:this.querySelector('[name="attendance"]:checked')?.value||'',guest_count:String(guestCount),total_registrants:String(this.querySelector('[name="attendance"]:checked')?.value==='Yes'?1+guestCount:0),guests:guestParts.join(' | '),committees:[...this.querySelectorAll('[name="committee"]:checked')].map(c=>c.value).join(' | '),dietary:this.querySelector('[name="dietary"]').value,message:this.querySelector('[name="message"]').value});try{await fetch(this.action,{method:'POST',body:params,headers:{'Content-Type':'application/x-www-form-urlencoded'},mode:'no-cors'});this.style.display='none';document.getElementById('rsvp-intro').style.display='none';document.getElementById('rsvp-success').style.display='block';window.scrollTo({top:document.getElementById('rsvp').offsetTop-80,behavior:'smooth'});}catch(err){btn.textContent='Send My RSVP ✦';btn.disabled=false;alert('Something went wrong. Please try again.');}}); 
 init();
 
 // ── Carousel ──
