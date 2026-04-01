@@ -220,6 +220,24 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:ce
 .gallery-submit-wrap p{font-size:0.88rem;color:var(--text-lt);margin-bottom:1rem;line-height:1.6;}
 .btn-gallery-submit{background:var(--navy);color:#fff;font-family:'Montserrat',sans-serif;font-size:0.68rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;padding:0.85rem 2rem;border-radius:2px;text-decoration:none;border:none;cursor:pointer;transition:all 0.25s;display:inline-block;}
 .btn-gallery-submit:hover{background:var(--navy-lt);transform:translateY(-2px);}
+
+/* PHOTO UPLOAD FORM */
+.photo-upload-form{max-width:500px;margin:0 auto;text-align:left;}
+.photo-upload-form .form-field{display:flex;flex-direction:column;gap:0.3rem;margin-bottom:1rem;}
+.photo-upload-form label{font-family:'Montserrat',sans-serif;font-size:0.62rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--text-lt);}
+.photo-upload-form input[type="text"],.photo-upload-form input[type="email"]{background:var(--cream);border:1px solid var(--border);border-radius:2px;padding:0.6rem 0.8rem;font-family:'Lato',sans-serif;font-size:0.88rem;color:var(--text);width:100%;transition:border-color 0.2s;}
+.photo-upload-form input:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 3px rgba(26,61,80,0.1);}
+.photo-upload-dropzone{border:2px dashed var(--border);border-radius:4px;padding:2rem;text-align:center;cursor:pointer;transition:border-color 0.2s,background 0.2s;background:var(--cream);}
+.photo-upload-dropzone:hover,.photo-upload-dropzone.dragover{border-color:var(--navy);background:rgba(26,61,80,0.04);}
+.photo-upload-dropzone p{font-size:0.88rem;color:var(--text-lt);margin-bottom:0.5rem;}
+.photo-upload-dropzone .browse-link{color:var(--orange);font-weight:600;cursor:pointer;}
+.photo-upload-preview{margin-top:1rem;display:none;position:relative;}
+.photo-upload-preview img{max-width:100%;max-height:200px;border-radius:3px;border:1px solid var(--border);}
+.photo-upload-preview .remove-preview{position:absolute;top:-8px;right:-8px;background:var(--orange);color:#fff;border:none;border-radius:50%;width:24px;height:24px;font-size:0.9rem;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.photo-upload-progress{display:none;margin-top:1rem;}
+.photo-upload-progress-bar{height:6px;background:var(--border);border-radius:3px;overflow:hidden;}
+.photo-upload-progress-fill{height:100%;background:var(--navy);border-radius:3px;transition:width 0.3s;width:0%;}
+.photo-upload-status{font-size:0.78rem;color:var(--text-lt);margin-top:0.4rem;text-align:center;}
 .carousel-nav{display:flex;align-items:center;justify-content:center;gap:1rem;margin-top:1.25rem;}
 .carousel-btn{background:var(--cream);border:1px solid var(--border);border-radius:2px;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;color:var(--navy);transition:all 0.2s;}
 .carousel-btn:hover{background:var(--navy);color:var(--gold);border-color:var(--navy);}
@@ -519,8 +537,41 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
         <button class="carousel-btn" id="carousel-next" onclick="carouselNext()">&#8594;</button>
       </div>
       <div class="gallery-submit-wrap">
-        <p>Have a photo to share? Submit it and we'll add it to the gallery after review.</p>
-        <a class="btn-gallery-submit" id="gallery-submit-link" href="https://docs.google.com/forms/d/1BWGbi_YmpA8xeEONwgSVlhYsChtE-I0shcLJahE20cY/viewform" target="_blank">Submit a Photo</a>
+        <p>Have a photo to share? Submit it below and we'll add it to the gallery after review.</p>
+        <button class="btn-gallery-submit" id="photo-upload-toggle" onclick="document.getElementById('photo-upload-section').style.display=this.style.display='none';document.getElementById('photo-upload-section').style.display='block';">Submit a Photo</button>
+        <div id="photo-upload-section" style="display:none;margin-top:1.5rem;">
+          <form id="photo-upload-form" class="photo-upload-form">
+            <div class="form-field">
+              <label>Your Name <span class="req">*</span></label>
+              <input type="text" name="submitter_name" placeholder="First Last" required/>
+            </div>
+            <div class="form-field">
+              <label>Caption</label>
+              <input type="text" name="caption" placeholder="e.g. Family picnic 2019"/>
+            </div>
+            <div class="form-field">
+              <label>Photo <span class="req">*</span></label>
+              <div class="photo-upload-dropzone" id="photo-dropzone">
+                <p>Drag &amp; drop a photo here, or <span class="browse-link">browse</span></p>
+                <p style="font-size:0.72rem;color:var(--text-lt);margin:0;">JPG, PNG — max 10 MB</p>
+                <input type="file" id="photo-file-input" name="photo" accept="image/jpeg,image/png" style="display:none;"/>
+              </div>
+              <div class="photo-upload-preview" id="photo-preview">
+                <img id="photo-preview-img" src="" alt="Preview"/>
+                <button type="button" class="remove-preview" onclick="clearPhotoPreview()">✕</button>
+              </div>
+            </div>
+            <div class="photo-upload-progress" id="photo-progress">
+              <div class="photo-upload-progress-bar"><div class="photo-upload-progress-fill" id="photo-progress-fill"></div></div>
+              <div class="photo-upload-status" id="photo-status">Uploading...</div>
+            </div>
+            <button type="submit" class="btn-gallery-submit" style="width:100%;margin-top:0.5rem;">Upload Photo</button>
+          </form>
+          <div id="photo-upload-success" style="display:none;text-align:center;padding:2rem 0;">
+            <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--navy);margin-bottom:0.5rem;">Photo Submitted!</h3>
+            <p style="font-size:0.88rem;color:var(--text-lt);">Thanks for sharing! Your photo will appear in the gallery once it's been reviewed.</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -677,6 +728,92 @@ init();
   } else {
     setTimeout(init, 100);
   }
+})();
+
+// ── Photo Upload ──
+(function(){
+  const PHOTO_UPLOAD_URL = ''; // Set to your gallery Apps Script URL
+  const dropzone = document.getElementById('photo-dropzone');
+  const fileInput = document.getElementById('photo-file-input');
+  const preview = document.getElementById('photo-preview');
+  const previewImg = document.getElementById('photo-preview-img');
+  let selectedFile = null;
+
+  if (!dropzone) return;
+
+  dropzone.addEventListener('click', () => fileInput.click());
+  dropzone.addEventListener('dragover', e => { e.preventDefault(); dropzone.classList.add('dragover'); });
+  dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragover'));
+  dropzone.addEventListener('drop', e => {
+    e.preventDefault();
+    dropzone.classList.remove('dragover');
+    if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
+  });
+  fileInput.addEventListener('change', () => { if (fileInput.files.length) handleFile(fileInput.files[0]); });
+
+  function handleFile(file){
+    if (!file.type.match(/^image\/(jpeg|png)$/)) { alert('Please select a JPG or PNG image.'); return; }
+    if (file.size > 10 * 1024 * 1024) { alert('File is too large. Maximum size is 10 MB.'); return; }
+    selectedFile = file;
+    const reader = new FileReader();
+    reader.onload = e => { previewImg.src = e.target.result; preview.style.display = 'block'; dropzone.style.display = 'none'; };
+    reader.readAsDataURL(file);
+  }
+
+  window.clearPhotoPreview = function(){
+    selectedFile = null;
+    fileInput.value = '';
+    preview.style.display = 'none';
+    dropzone.style.display = 'block';
+  };
+
+  document.getElementById('photo-upload-form').addEventListener('submit', async function(e){
+    e.preventDefault();
+    const name = this.querySelector('[name="submitter_name"]').value.trim();
+    if (!name) { alert('Please enter your name.'); return; }
+    if (!selectedFile) { alert('Please select a photo.'); return; }
+    if (!PHOTO_UPLOAD_URL) { alert('Photo upload is not configured yet. Please try again later.'); return; }
+
+    const progress = document.getElementById('photo-progress');
+    const fill = document.getElementById('photo-progress-fill');
+    const status = document.getElementById('photo-status');
+    const submitBtn = this.querySelector('[type="submit"]');
+    submitBtn.disabled = true;
+    progress.style.display = 'block';
+    status.textContent = 'Uploading...';
+    fill.style.width = '30%';
+
+    const reader = new FileReader();
+    reader.onload = async function(){
+      fill.style.width = '60%';
+      const base64 = reader.result.split(',')[1];
+      const params = {
+        submitter_name: name,
+        caption: document.querySelector('[name="caption"]').value.trim(),
+        filename: selectedFile.name,
+        mimetype: selectedFile.type,
+        data: base64
+      };
+      try {
+        fill.style.width = '80%';
+        status.textContent = 'Saving...';
+        await fetch(PHOTO_UPLOAD_URL, {
+          method: 'POST',
+          body: JSON.stringify(params),
+          headers: {'Content-Type':'text/plain'},
+          mode: 'no-cors'
+        });
+        fill.style.width = '100%';
+        status.textContent = 'Done!';
+        document.getElementById('photo-upload-form').style.display = 'none';
+        document.getElementById('photo-upload-success').style.display = 'block';
+      } catch(err) {
+        status.textContent = 'Upload failed. Please try again.';
+        submitBtn.disabled = false;
+      }
+    };
+    reader.readAsDataURL(selectedFile);
+  });
 })();
 
 // ── Lightbox ──
