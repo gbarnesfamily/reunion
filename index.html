@@ -553,6 +553,10 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
               <input type="text" name="submitter_name" placeholder="First Last" required/>
             </div>
             <div class="form-field">
+              <label>Email <span class="req">*</span></label>
+              <input type="email" name="submitter_email" placeholder="your@email.com" required/>
+            </div>
+            <div class="form-field">
               <label>Caption</label>
               <input type="text" name="caption" placeholder="e.g. Family picnic 2019"/>
             </div>
@@ -799,7 +803,9 @@ init();
   document.getElementById('photo-upload-form').addEventListener('submit', async function(e){
     e.preventDefault();
     const name = this.querySelector('[name="submitter_name"]').value.trim();
+    const email = this.querySelector('[name="submitter_email"]').value.trim();
     if (!name) { alert('Please enter your name.'); return; }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { alert('Please enter a valid email address.'); return; }
     if (!selectedFiles.length) { alert('Please select at least one photo.'); return; }
     if (!PHOTO_UPLOAD_URL) { alert('Photo upload is not configured yet. Please try again later.'); return; }
 
@@ -822,6 +828,7 @@ init();
           method: 'POST',
           body: JSON.stringify({
             submitter_name: name,
+            submitter_email: email,
             caption: caption,
             filename: selectedFiles[i].name,
             mimetype: selectedFiles[i].type,
