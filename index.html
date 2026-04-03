@@ -220,6 +220,24 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:ce
 .gallery-submit-wrap p{font-size:0.88rem;color:var(--text-lt);margin-bottom:1rem;line-height:1.6;}
 .btn-gallery-submit{background:var(--navy);color:#fff;font-family:'Montserrat',sans-serif;font-size:0.68rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;padding:0.85rem 2rem;border-radius:2px;text-decoration:none;border:none;cursor:pointer;transition:all 0.25s;display:inline-block;}
 .btn-gallery-submit:hover{background:var(--navy-lt);transform:translateY(-2px);}
+
+/* PHOTO UPLOAD FORM */
+.photo-upload-form{max-width:500px;margin:0 auto;text-align:left;}
+.photo-upload-form .form-field{display:flex;flex-direction:column;gap:0.3rem;margin-bottom:1rem;}
+.photo-upload-form label{font-family:'Montserrat',sans-serif;font-size:0.62rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--text-lt);}
+.photo-upload-form input[type="text"],.photo-upload-form input[type="email"]{background:var(--cream);border:1px solid var(--border);border-radius:2px;padding:0.6rem 0.8rem;font-family:'Lato',sans-serif;font-size:0.88rem;color:var(--text);width:100%;transition:border-color 0.2s;}
+.photo-upload-form input:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 3px rgba(26,61,80,0.1);}
+.photo-upload-dropzone{border:2px dashed var(--border);border-radius:4px;padding:2rem;text-align:center;cursor:pointer;transition:border-color 0.2s,background 0.2s;background:var(--cream);}
+.photo-upload-dropzone:hover,.photo-upload-dropzone.dragover{border-color:var(--navy);background:rgba(26,61,80,0.04);}
+.photo-upload-dropzone p{font-size:0.88rem;color:var(--text-lt);margin-bottom:0.5rem;}
+.photo-upload-dropzone .browse-link{color:var(--orange);font-weight:600;cursor:pointer;}
+.photo-upload-preview{margin-top:1rem;display:none;position:relative;}
+.photo-upload-preview img{max-width:100%;max-height:200px;border-radius:3px;border:1px solid var(--border);}
+.photo-upload-preview .remove-preview{position:absolute;top:-8px;right:-8px;background:var(--orange);color:#fff;border:none;border-radius:50%;width:24px;height:24px;font-size:0.9rem;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.photo-upload-progress{display:none;margin-top:1rem;}
+.photo-upload-progress-bar{height:6px;background:var(--border);border-radius:3px;overflow:hidden;}
+.photo-upload-progress-fill{height:100%;background:var(--navy);border-radius:3px;transition:width 0.3s;width:0%;}
+.photo-upload-status{font-size:0.78rem;color:var(--text-lt);margin-top:0.4rem;text-align:center;}
 .carousel-nav{display:flex;align-items:center;justify-content:center;gap:1rem;margin-top:1.25rem;}
 .carousel-btn{background:var(--cream);border:1px solid var(--border);border-radius:2px;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;color:var(--navy);transition:all 0.2s;}
 .carousel-btn:hover{background:var(--navy);color:var(--gold);border-color:var(--navy);}
@@ -296,7 +314,7 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
     <div class="hero-dates">
       <div class="hero-date-row">
         <div class="hero-date-label green">Friday, July 10 &nbsp;·&nbsp; 5:00 P.M.<sup style="font-size:0.6em;">*</sup></div>
-        <div class="hero-date-name">Kickoff Evening Activity</div>
+        <div class="hero-date-name">Fish Fry, Movie &amp; Ice Cream Social</div>
       </div>
       <div class="hero-date-row">
         <div class="hero-date-label gold">Saturday, July 11 &nbsp;·&nbsp; 12:00 P.M.<sup style="font-size:0.6em;">*</sup></div>
@@ -336,7 +354,7 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
     <div class="details-list">
 
       <div class="details-item">
-        <div class="details-item-label">Kickoff Evening</div>
+        <div class="details-item-label">Fish Fry, Movie &amp; Ice Cream Social</div>
         <div class="details-item-title">Friday, July 10, 2026</div>
         <div class="details-item-time">Time: 5:00 P.M. (TBC)</div>
       </div>
@@ -452,6 +470,13 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
               <label><input type="radio" name="attendance" value="No"/><span class="attend-option">Can't make it this time</span></label>
             </div>
           </div>
+          <div class="form-field" id="attending-days-field">
+            <label>Which days will you attend?</label>
+            <div style="display:flex;flex-direction:column;gap:0.5rem;margin-top:0.3rem;">
+              <label style="display:flex;align-items:center;gap:0.6rem;font-size:0.88rem;color:var(--text);cursor:pointer;font-weight:400;text-transform:none;letter-spacing:0;"><input type="checkbox" name="attending_friday" value="Yes" style="width:16px;height:16px;accent-color:var(--navy);"/> Friday, July 10 — Fish Fry, Movie &amp; Ice Cream Social</label>
+              <label style="display:flex;align-items:center;gap:0.6rem;font-size:0.88rem;color:var(--text);cursor:pointer;font-weight:400;text-transform:none;letter-spacing:0;"><input type="checkbox" name="attending_saturday" value="Yes" style="width:16px;height:16px;accent-color:var(--navy);"/> Saturday, July 11 — Family Reunion</label>
+            </div>
+          </div>
         </div>
         <div class="form-card">
           <div class="form-card-title"><span class="num">2</span> Additional Guests</div>
@@ -519,8 +544,42 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
         <button class="carousel-btn" id="carousel-next" onclick="carouselNext()">&#8594;</button>
       </div>
       <div class="gallery-submit-wrap">
-        <p>Have a photo to share? Submit it and we'll add it to the gallery after review.</p>
-        <a class="btn-gallery-submit" id="gallery-submit-link" href="https://docs.google.com/forms/d/1BWGbi_YmpA8xeEONwgSVlhYsChtE-I0shcLJahE20cY/viewform" target="_blank">Submit a Photo</a>
+        <p>Have a photo to share? Submit it below and we'll add it to the gallery after review.</p>
+        <button class="btn-gallery-submit" id="photo-upload-toggle" onclick="document.getElementById('photo-upload-section').style.display=this.style.display='none';document.getElementById('photo-upload-section').style.display='block';">Submit a Photo</button>
+        <div id="photo-upload-section" style="display:none;margin-top:1.5rem;">
+          <form id="photo-upload-form" class="photo-upload-form">
+            <div class="form-field">
+              <label>Your Name <span class="req">*</span></label>
+              <input type="text" name="submitter_name" placeholder="First Last" required/>
+            </div>
+            <div class="form-field">
+              <label>Email <span class="req">*</span></label>
+              <input type="email" name="submitter_email" placeholder="your@email.com" required/>
+            </div>
+            <div class="form-field">
+              <label>Caption</label>
+              <input type="text" name="caption" placeholder="e.g. Family picnic 2019"/>
+            </div>
+            <div class="form-field">
+              <label>Photos <span class="req">*</span> <span style="font-weight:400;text-transform:none;letter-spacing:0;font-size:0.7rem;color:var(--text-lt);">(up to 5)</span></label>
+              <div class="photo-upload-dropzone" id="photo-dropzone">
+                <p>Drag &amp; drop photos here, or <span class="browse-link">browse</span></p>
+                <p style="font-size:0.72rem;color:var(--text-lt);margin:0;">JPG, PNG — max 10 MB each</p>
+                <input type="file" id="photo-file-input" name="photo" accept="image/jpeg,image/png" multiple style="display:none;"/>
+              </div>
+              <div id="photo-previews" style="display:flex;flex-wrap:wrap;gap:0.75rem;margin-top:1rem;"></div>
+            </div>
+            <div class="photo-upload-progress" id="photo-progress">
+              <div class="photo-upload-progress-bar"><div class="photo-upload-progress-fill" id="photo-progress-fill"></div></div>
+              <div class="photo-upload-status" id="photo-status">Uploading...</div>
+            </div>
+            <button type="submit" class="btn-gallery-submit" style="width:100%;margin-top:0.5rem;">Upload Photo</button>
+          </form>
+          <div id="photo-upload-success" style="display:none;text-align:center;padding:2rem 0;">
+            <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--navy);margin-bottom:0.5rem;">Photos Submitted!</h3>
+            <p style="font-size:0.88rem;color:var(--text-lt);">Thanks for sharing! Your photos will appear in the gallery once they've been reviewed.</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -596,7 +655,7 @@ function changeGuests(delta){const n=guestCount+delta;if(n<0||n>10)return;delta>
 function addGuestCard(n){const list=document.getElementById('guest-list'),card=document.createElement('div');card.className='guest-card';card.dataset.n=n;card.innerHTML=`<div class="guest-card-head"><span class="guest-card-title">Guest ${n}</span><button type="button" class="remove-guest" onclick="removeGuest(${n})">✕</button></div><div class="form-row"><div class="form-field" id="gf-name-${n}"><label>Full Name <span class="req">*</span></label><input type="text" name="guest_${n}_name" placeholder="First Last"/><span class="field-error">Required</span></div><div class="form-field"><label>Age 13 or under?</label><select name="guest_${n}_child"><option value="">— Select —</option><option>No</option><option>Yes</option></select></div></div>`;list.appendChild(card);}
 function removeLastGuest(){const cards=document.getElementById('guest-list').querySelectorAll('.guest-card');if(cards.length)cards[cards.length-1].remove();}
 function removeGuest(n){document.querySelector(`.guest-card[data-n="${n}"]`)?.remove();guestCount--;document.getElementById('guest-count').textContent=guestCount;document.getElementById('guest-dec').disabled=guestCount===0;document.getElementById('guest-inc').disabled=guestCount===10;document.querySelectorAll('.guest-card').forEach((c,i)=>c.querySelector('.guest-card-title').textContent=`Guest ${i+1}`);}
-document.getElementById('rsvp-form').addEventListener('submit',async function(e){e.preventDefault();let valid=true;[{id:'ff-first',field:'first_name',type:'text'},{id:'ff-last',field:'last_name',type:'text'},{id:'ff-email',field:'email',type:'email'},{id:'ff-phone',field:'phone',type:'text'}].forEach(r=>{const el=this.querySelector(`[name="${r.field}"]`),wrap=document.getElementById(r.id);let ok=el.value.trim()!=='';if(r.type==='email')ok=ok&&/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value);wrap.classList.toggle('has-error',!ok);if(!ok)valid=false;});document.querySelectorAll('.guest-card').forEach(card=>{const n=card.dataset.n,nameEl=card.querySelector(`[name="guest_${n}_name"]`),wrap=document.getElementById(`gf-name-${n}`);if(nameEl&&wrap){const ok=nameEl.value.trim()!=='';wrap.classList.toggle('has-error',!ok);if(!ok)valid=false;}});if(!valid){document.querySelector('.has-error')?.scrollIntoView({behavior:'smooth',block:'center'});return;}const btn=this.querySelector('.rsvp-submit');btn.textContent='Sending…';btn.disabled=true;const guestParts=[];document.querySelectorAll('.guest-card').forEach(card=>{const n=card.dataset.n,name=card.querySelector(`[name="guest_${n}_name"]`)?.value||'',child=card.querySelector(`[name="guest_${n}_child"]`)?.value||'';if(name)guestParts.push(name+(child==='Yes'?' (child)':''));});const params=new URLSearchParams({first_name:this.querySelector('[name="first_name"]').value,last_name:this.querySelector('[name="last_name"]').value,email:this.querySelector('[name="email"]').value,phone:this.querySelector('[name="phone"]').value,sms_optin:this.querySelector('[name="sms_optin"]')?.checked?'Yes':'No',city:this.querySelector('[name="city"]').value,state:this.querySelector('[name="state"]').value,attendance:this.querySelector('[name="attendance"]:checked')?.value||'',guest_count:String(guestCount),total_registrants:String(this.querySelector('[name="attendance"]:checked')?.value==='Yes'?1+guestCount:0),guests:guestParts.join(' | '),committees:[...this.querySelectorAll('[name="committee"]:checked')].map(c=>c.value).join(' | '),dietary:this.querySelector('[name="dietary"]').value,message:this.querySelector('[name="message"]').value});try{await fetch(this.action,{method:'POST',body:params,headers:{'Content-Type':'application/x-www-form-urlencoded'},mode:'no-cors'});this.style.display='none';document.getElementById('rsvp-intro').style.display='none';document.getElementById('rsvp-success').style.display='block';window.scrollTo({top:document.getElementById('rsvp').offsetTop-80,behavior:'smooth'});}catch(err){btn.textContent='Send My RSVP ✦';btn.disabled=false;alert('Something went wrong. Please try again.');}}); 
+document.getElementById('rsvp-form').addEventListener('submit',async function(e){e.preventDefault();let valid=true;[{id:'ff-first',field:'first_name',type:'text'},{id:'ff-last',field:'last_name',type:'text'},{id:'ff-email',field:'email',type:'email'},{id:'ff-phone',field:'phone',type:'text'}].forEach(r=>{const el=this.querySelector(`[name="${r.field}"]`),wrap=document.getElementById(r.id);let ok=el.value.trim()!=='';if(r.type==='email')ok=ok&&/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value);wrap.classList.toggle('has-error',!ok);if(!ok)valid=false;});document.querySelectorAll('.guest-card').forEach(card=>{const n=card.dataset.n,nameEl=card.querySelector(`[name="guest_${n}_name"]`),wrap=document.getElementById(`gf-name-${n}`);if(nameEl&&wrap){const ok=nameEl.value.trim()!=='';wrap.classList.toggle('has-error',!ok);if(!ok)valid=false;}});if(!valid){document.querySelector('.has-error')?.scrollIntoView({behavior:'smooth',block:'center'});return;}const btn=this.querySelector('.rsvp-submit');btn.textContent='Sending…';btn.disabled=true;const guestParts=[];document.querySelectorAll('.guest-card').forEach(card=>{const n=card.dataset.n,name=card.querySelector(`[name="guest_${n}_name"]`)?.value||'',child=card.querySelector(`[name="guest_${n}_child"]`)?.value||'';if(name)guestParts.push(name+(child==='Yes'?' (child)':''));});const params=new URLSearchParams({first_name:this.querySelector('[name="first_name"]').value,last_name:this.querySelector('[name="last_name"]').value,email:this.querySelector('[name="email"]').value,phone:this.querySelector('[name="phone"]').value,sms_optin:this.querySelector('[name="sms_optin"]')?.checked?'Yes':'No',city:this.querySelector('[name="city"]').value,state:this.querySelector('[name="state"]').value,attendance:this.querySelector('[name="attendance"]:checked')?.value||'',attending_friday:this.querySelector('[name="attending_friday"]')?.checked?'Yes':'No',attending_saturday:this.querySelector('[name="attending_saturday"]')?.checked?'Yes':'No',guest_count:String(guestCount),total_registrants:String(this.querySelector('[name="attendance"]:checked')?.value==='Yes'?1+guestCount:0),guests:guestParts.join(' | '),committees:[...this.querySelectorAll('[name="committee"]:checked')].map(c=>c.value).join(' | '),dietary:this.querySelector('[name="dietary"]').value,message:this.querySelector('[name="message"]').value});try{await fetch(this.action,{method:'POST',body:params,headers:{'Content-Type':'application/x-www-form-urlencoded'},mode:'no-cors'});this.style.display='none';document.getElementById('rsvp-intro').style.display='none';document.getElementById('rsvp-success').style.display='block';window.scrollTo({top:document.getElementById('rsvp').offsetTop-80,behavior:'smooth'});}catch(err){btn.textContent='Send My RSVP ✦';btn.disabled=false;alert('Something went wrong. Please try again.');}}); 
 init();
 
 // ── Carousel ──
@@ -677,6 +736,117 @@ init();
   } else {
     setTimeout(init, 100);
   }
+})();
+
+// ── Photo Upload ──
+(function(){
+  const PHOTO_UPLOAD_URL = 'https://script.google.com/macros/s/AKfycbwENyDt3AOr0aMQjW2e9-uvYOjqO5tMWRt2WZknSERBJSrTLY0e1kzXL-K91WM5bpiEMg/exec';
+  const dropzone = document.getElementById('photo-dropzone');
+  const fileInput = document.getElementById('photo-file-input');
+  const previewsEl = document.getElementById('photo-previews');
+  const MAX_PHOTOS = 5;
+  let selectedFiles = [];
+
+  if (!dropzone) return;
+
+  dropzone.addEventListener('click', () => fileInput.click());
+  dropzone.addEventListener('dragover', e => { e.preventDefault(); dropzone.classList.add('dragover'); });
+  dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragover'));
+  dropzone.addEventListener('drop', e => {
+    e.preventDefault();
+    dropzone.classList.remove('dragover');
+    addFiles([...e.dataTransfer.files]);
+  });
+  fileInput.addEventListener('change', () => { addFiles([...fileInput.files]); fileInput.value = ''; });
+
+  function addFiles(files){
+    for (const file of files) {
+      if (selectedFiles.length >= MAX_PHOTOS) { alert('Maximum ' + MAX_PHOTOS + ' photos allowed.'); break; }
+      if (!file.type.match(/^image\/(jpeg|png)$/)) { alert(file.name + ' is not a JPG or PNG image.'); continue; }
+      if (file.size > 10 * 1024 * 1024) { alert(file.name + ' is too large. Maximum size is 10 MB.'); continue; }
+      selectedFiles.push(file);
+    }
+    renderPreviews();
+  }
+
+  function renderPreviews(){
+    previewsEl.innerHTML = '';
+    selectedFiles.forEach((file, i) => {
+      const wrap = document.createElement('div');
+      wrap.style.cssText = 'position:relative;width:90px;height:90px;border-radius:3px;overflow:hidden;border:1px solid var(--border);';
+      const img = document.createElement('img');
+      img.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block;';
+      const reader = new FileReader();
+      reader.onload = e => { img.src = e.target.result; };
+      reader.readAsDataURL(file);
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.textContent = '✕';
+      btn.style.cssText = 'position:absolute;top:-2px;right:-2px;background:var(--orange);color:#fff;border:none;border-radius:50%;width:20px;height:20px;font-size:0.7rem;cursor:pointer;display:flex;align-items:center;justify-content:center;';
+      btn.onclick = () => { selectedFiles.splice(i, 1); renderPreviews(); };
+      wrap.appendChild(img);
+      wrap.appendChild(btn);
+      previewsEl.appendChild(wrap);
+    });
+    dropzone.style.display = selectedFiles.length >= MAX_PHOTOS ? 'none' : 'block';
+  }
+
+  function readFileAsBase64(file){
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result.split(',')[1]);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  document.getElementById('photo-upload-form').addEventListener('submit', async function(e){
+    e.preventDefault();
+    const name = this.querySelector('[name="submitter_name"]').value.trim();
+    const email = this.querySelector('[name="submitter_email"]').value.trim();
+    if (!name) { alert('Please enter your name.'); return; }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { alert('Please enter a valid email address.'); return; }
+    if (!selectedFiles.length) { alert('Please select at least one photo.'); return; }
+    if (!PHOTO_UPLOAD_URL) { alert('Photo upload is not configured yet. Please try again later.'); return; }
+
+    const progress = document.getElementById('photo-progress');
+    const fill = document.getElementById('photo-progress-fill');
+    const status = document.getElementById('photo-status');
+    const submitBtn = this.querySelector('[type="submit"]');
+    submitBtn.disabled = true;
+    progress.style.display = 'block';
+    const caption = document.querySelector('[name="caption"]').value.trim();
+    const total = selectedFiles.length;
+
+    try {
+      for (let i = 0; i < total; i++) {
+        const pct = Math.round(((i) / total) * 100);
+        fill.style.width = pct + '%';
+        status.textContent = 'Uploading photo ' + (i + 1) + ' of ' + total + '...';
+        const base64 = await readFileAsBase64(selectedFiles[i]);
+        await fetch(PHOTO_UPLOAD_URL, {
+          method: 'POST',
+          body: JSON.stringify({
+            submitter_name: name,
+            submitter_email: email,
+            caption: caption,
+            filename: selectedFiles[i].name,
+            mimetype: selectedFiles[i].type,
+            data: base64
+          }),
+          headers: {'Content-Type':'text/plain'},
+          mode: 'no-cors'
+        });
+      }
+      fill.style.width = '100%';
+      status.textContent = 'Done!';
+      document.getElementById('photo-upload-form').style.display = 'none';
+      document.getElementById('photo-upload-success').style.display = 'block';
+    } catch(err) {
+      status.textContent = 'Upload failed. Please try again.';
+      submitBtn.disabled = false;
+    }
+  });
 })();
 
 // ── Lightbox ──
