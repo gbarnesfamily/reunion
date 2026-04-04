@@ -533,21 +533,9 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
       <p class="section-sub">Browse and upload memories from over the years.</p>
     </div>
     <div class="carousel-wrap">
-      <div class="carousel-track-outer">
+      <div id="gallery-empty" style="text-align:center;padding:3rem 1rem;color:var(--text-lt);font-size:0.9rem;display:none;">No photos yet — be the first to share a memory!</div>
+      <div class="carousel-track-outer" id="carousel-outer">
         <div class="carousel-track" id="carousel-track">
-          <!-- Static photos -->
-          <div class="carousel-slide">
-            <img src="images/reunion-2016.jpg" alt="Family Reunion 2016"/>
-            <div class="carousel-caption">Family Reunion 2016</div>
-          </div>
-          <div class="carousel-slide">
-            <img src="images/barnes-family-1.jpg" alt="Barnes Family"/>
-            <div class="carousel-caption">Barnes Family</div>
-          </div>
-          <div class="carousel-slide">
-            <img src="images/barnes-family-2.jpg" alt="Barnes Family"/>
-            <div class="carousel-caption">Barnes Family</div>
-          </div>
           <!-- Approved photos from Google Sheet load here -->
         </div>
       </div>
@@ -605,7 +593,7 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
       <span class="contact-icon">&#9993;</span>
       <h3>George Barnes Family Reunion Committee</h3>
       <p>Have a question about the reunion, need help with your RSVP, or just want to say hello? Drop us a line and we'll get back to you.</p>
-      <a class="contact-email" href="mailto:g.barnes.family@gmail.com">Email Us</a>
+      <a class="contact-email" href="mailto:g.barnes.family@gmail.com?subject=Reunion%20Question%20Form">Email Us</a>
     </div>
   </div>
 </section>
@@ -717,10 +705,15 @@ init();
   const GALLERY_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzo_oG1BjxkmQyux_UeOBh7teVuflEZfsGo2l7Umn1SY5QWaf3yXUF6SHglRiyOHke1_g/exec';
 
   function loadApprovedPhotos(){
-    if (!GALLERY_SCRIPT_URL) return;
+    var emptyEl = document.getElementById('gallery-empty');
+    var outerEl = document.getElementById('carousel-outer');
+    var navEl = document.querySelector('.carousel-nav');
+    if (!GALLERY_SCRIPT_URL) { emptyEl.style.display = 'block'; outerEl.style.display = 'none'; if(navEl)navEl.style.display='none'; return; }
     fetch(GALLERY_SCRIPT_URL)
       .then(r => r.json())
       .then(photos => {
+        if (!photos.length) { emptyEl.style.display = 'block'; outerEl.style.display = 'none'; if(navEl)navEl.style.display='none'; return; }
+        emptyEl.style.display = 'none'; outerEl.style.display = 'block'; if(navEl)navEl.style.display='flex';
         photos.forEach(p => {
           const slide = document.createElement('div');
           slide.className = 'carousel-slide';
@@ -732,7 +725,7 @@ init();
         buildDots();
         goTo(0);
       })
-      .catch(() => {});
+      .catch(() => { emptyEl.style.display = 'block'; outerEl.style.display = 'none'; if(navEl)navEl.style.display='none'; });
   }
 
   function slidesPerView(){
