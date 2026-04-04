@@ -248,6 +248,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:ce
 .gallery-upload-note{text-align:center;margin-top:1.25rem;font-size:0.82rem;color:var(--text-lt);line-height:1.7;}
 .gallery-upload-note strong{color:var(--navy);}
 
+/* CONTACT */
+#contact{padding:5.5rem 2rem;background:var(--cream);}
+.contact-card{max-width:500px;margin:2rem auto 0;background:var(--white);border:1px solid var(--border);border-top:3px solid var(--gold);border-radius:2px;padding:2rem;text-align:center;}
+.contact-card .contact-icon{font-size:2rem;margin-bottom:0.75rem;display:block;}
+.contact-card h3{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;color:var(--navy);margin-bottom:0.5rem;}
+.contact-card p{font-size:0.88rem;color:var(--text-lt);line-height:1.7;margin-bottom:1rem;}
+.contact-card a.contact-email{display:inline-block;background:var(--navy);color:#fff;font-family:'Montserrat',sans-serif;font-size:0.68rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;padding:0.75rem 1.8rem;border-radius:2px;text-decoration:none;transition:all 0.25s;}
+.contact-card a.contact-email:hover{background:var(--navy-lt);transform:translateY(-2px);}
+
 /* FOOTER */
 footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2rem;text-align:center;}
 .footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;color:var(--gold);margin-bottom:0.25rem;}
@@ -293,12 +302,13 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
 
 <!-- NAV -->
 <nav id="main-nav" style="display:none;">
-  <a href="#home" class="nav-logo">Barnes '26</a>
+  <a href="#home" class="nav-logo"></a>
   <ul class="nav-links" id="nav-links">
     <li id="nav-home"><a href="#home">Home</a></li>
     <li id="nav-details" class="hidden-page"><a href="#details">Details</a></li>
     <li id="nav-legacy" class="hidden-page"><a href="#legacy">Our Legacy</a></li>
     <li id="nav-gallery" class="hidden-page"><a href="#gallery">Gallery</a></li>
+    <li id="nav-contact" class="hidden-page"><a href="#contact">Contact</a></li>
     <li id="nav-rsvp" class="hidden-page"><a href="#rsvp" class="rsvp-link">RSVP</a></li>
   </ul>
   <div class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
@@ -307,8 +317,7 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
 <!-- HOME -->
 <section class="site-section" id="home">
   <div class="hero-text">
-    <p class="hero-eyebrow">Celebrating Our Roots &nbsp;·&nbsp; Together Again</p>
-    <h1 class="hero-title">George Barnes<em>Family Reunion</em></h1>
+<h1 class="hero-title">George Barnes<em>Family Reunion</em></h1>
     <p class="hero-sub">Honoring Yesterday &nbsp;·&nbsp; Celebrating Today</p>
     <div class="hero-rule-bar"></div>
     <div class="hero-dates">
@@ -317,7 +326,7 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
         <div class="hero-date-name">Fish Fry, Movie &amp; Ice Cream Social</div>
       </div>
       <div class="hero-date-row">
-        <div class="hero-date-label gold">Saturday, July 11 &nbsp;·&nbsp; 12:00 P.M.<sup style="font-size:0.6em;">*</sup></div>
+        <div class="hero-date-label green">Saturday, July 11 &nbsp;·&nbsp; 12:00 P.M.<sup style="font-size:0.6em;">*</sup></div>
         <div class="hero-date-name">Family Reunion</div>
       </div>
     </div>
@@ -441,7 +450,7 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
       <span class="section-eye">RSVP</span>
       <h2 class="section-h2">We'd Love to <em>See You!</em></h2>
     </div>
-    <div id="rsvp-success"><h3>You're on the List!</h3><p>Your RSVP has been received. We'll be in touch with more details soon. Can't wait to see you — July 10–11 in Erwin, NC!</p></div>
+    <div id="rsvp-success"><h3 id="rsvp-success-title"></h3><p id="rsvp-success-msg"></p></div>
     <form id="rsvp-form" action="https://script.google.com/macros/s/AKfycbxc7GeHOIhYAyZQsLYjhJz5czoaPtkGaxl9wrF2xySPPj_SUMbkPCs0avGd3sAHTqkHjg/exec" method="POST" novalidate>
       <div class="rsvp-form-wrap">
         <div class="form-card">
@@ -478,7 +487,7 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
             </div>
           </div>
         </div>
-        <div class="form-card">
+        <div class="form-card rsvp-attending-section" id="rsvp-guests-card">
           <div class="form-card-title"><span class="num">2</span> Additional Guests</div>
           <div class="counter-row">
             <span class="counter-label">How many guests are you bringing?</span>
@@ -490,7 +499,7 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
           </div>
           <div id="guest-list"></div>
         </div>
-        <div class="form-card">
+        <div class="form-card rsvp-attending-section" id="rsvp-committees-card">
           <div class="form-card-title"><span class="num">3</span> Volunteer for a Committee</div>
           <p style="font-size:0.88rem;color:var(--text-lt);line-height:1.6;margin-bottom:1rem;">Interested in helping out? Select any committees you'd like to join.</p>
           <div style="display:flex;flex-direction:column;gap:0.6rem;">
@@ -500,12 +509,15 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
             <label style="display:flex;align-items:center;gap:0.6rem;font-size:0.88rem;color:var(--text);cursor:pointer;"><input type="checkbox" name="committee" value="Setup & Break Down" style="width:16px;height:16px;accent-color:var(--navy);"/> Setup &amp; Break Down</label>
           </div>
         </div>
-        <div class="form-card">
-          <div class="form-card-title"><span class="num">4</span> Anything Else?</div>
-          <div class="form-field"><label>Dietary Restrictions / Special Needs</label><textarea name="dietary" placeholder="e.g. gluten-free, nut allergy, wheelchair seating needed…"></textarea></div>
-          <div class="form-field"><label>Message to the Family</label><textarea name="message" placeholder="Share a memory, a shoutout, or just say hello!"></textarea></div>
+        <div class="form-card rsvp-attending-section" id="rsvp-dietary-card">
+          <div class="form-card-title"><span class="num">4</span> Dietary Restrictions / Special Needs</div>
+          <div class="form-field"><textarea name="dietary" placeholder="e.g. gluten-free, nut allergy, wheelchair seating needed…"></textarea></div>
         </div>
-        <button type="submit" class="rsvp-submit">Send My RSVP ✦</button>
+        <div class="form-card">
+          <div class="form-card-title" id="rsvp-message-title"><span class="num">5</span> Message to the Family</div>
+          <div class="form-field"><textarea name="message" placeholder="Share a memory, a shoutout, or just say hello!"></textarea></div>
+        </div>
+        <button type="submit" class="rsvp-submit" id="rsvp-submit-btn">Send My RSVP ✦</button>
       </div>
     </form>
   </div>
@@ -520,21 +532,9 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
       <p class="section-sub">Browse and upload memories from over the years.</p>
     </div>
     <div class="carousel-wrap">
-      <div class="carousel-track-outer">
+      <div id="gallery-empty" style="text-align:center;padding:3rem 1rem;color:var(--text-lt);font-size:0.9rem;display:none;">No photos yet — be the first to share a memory!</div>
+      <div class="carousel-track-outer" id="carousel-outer">
         <div class="carousel-track" id="carousel-track">
-          <!-- Static photos -->
-          <div class="carousel-slide">
-            <img src="images/reunion-2016.jpg" alt="Family Reunion 2016"/>
-            <div class="carousel-caption">Family Reunion 2016</div>
-          </div>
-          <div class="carousel-slide">
-            <img src="images/barnes-family-1.jpg" alt="Barnes Family"/>
-            <div class="carousel-caption">Barnes Family</div>
-          </div>
-          <div class="carousel-slide">
-            <img src="images/barnes-family-2.jpg" alt="Barnes Family"/>
-            <div class="carousel-caption">Barnes Family</div>
-          </div>
           <!-- Approved photos from Google Sheet load here -->
         </div>
       </div>
@@ -581,6 +581,22 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
   </div>
 </section>
 
+<!-- CONTACT -->
+<section class="site-section" id="contact">
+  <div class="section-wrap">
+    <div class="section-header">
+      <span class="section-eye">Get In Touch</span>
+      <h2 class="section-h2">Questions? <em>We're Here.</em></h2>
+    </div>
+    <div class="contact-card">
+      <span class="contact-icon">&#9993;</span>
+      <h3>George Barnes Family Reunion Committee</h3>
+      <p>Have a question about the reunion, need help with your RSVP, or just want to say hello? Drop us a line and we'll get back to you.</p>
+      <a class="contact-email" href="mailto:g.barnes.family@gmail.com?subject=Reunion%20Question%20Form">Email Us</a>
+    </div>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer id="main-footer" style="display:none;">
   <div class="footer-logo">George Barnes Family Reunion</div>
@@ -588,7 +604,7 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
   <ul class="footer-links">
     <li><a href="#home">Home</a></li><li><a href="#details">Details</a></li>
     <li><a href="#schedule">Schedule</a></li><li><a href="#legacy">Our Legacy</a></li>
-    <li><a href="#gallery">Gallery</a></li><li><a href="#rsvp">RSVP</a></li>
+    <li><a href="#gallery">Gallery</a></li><li><a href="#contact">Contact</a></li><li><a href="#rsvp">RSVP</a></li>
   </ul>
   <p class="footer-copy">© 2026 George Barnes Family Reunion Committee</p>
 </footer>
@@ -611,6 +627,7 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
     <div class="admin-row"><span class="admin-row-label">Our Legacy</span><label class="toggle-switch"><input type="checkbox" data-section="legacy" onchange="adminToggle(this)"/><span class="toggle-slider"></span></label></div>
     <div class="admin-row"><span class="admin-row-label">RSVP / Registration</span><label class="toggle-switch"><input type="checkbox" data-section="rsvp" onchange="adminToggle(this)"/><span class="toggle-slider"></span></label></div>
     <div class="admin-row"><span class="admin-row-label">Photo Gallery</span><label class="toggle-switch"><input type="checkbox" data-section="gallery" onchange="adminToggle(this)"/><span class="toggle-slider"></span></label></div>
+    <div class="admin-row"><span class="admin-row-label">Contact</span><label class="toggle-switch"><input type="checkbox" data-section="contact" onchange="adminToggle(this)"/><span class="toggle-slider"></span></label></div>
     <button id="admin-save-btn" onclick="adminSave()">Save &amp; Publish Changes</button>
   </div>
 </div>
@@ -626,7 +643,7 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
 
 <script>
 const ADMIN_PASSWORD='Reunion2026';
-const DEFAULT_VISIBILITY={home:true,countdown:false,details:true,schedule:true,legacy:true,rsvp:true,gallery:true};
+const DEFAULT_VISIBILITY={home:true,countdown:false,details:true,schedule:true,legacy:true,rsvp:true,gallery:true,contact:true};
 let visibility={},adminUnlocked=false,guestCount=0;
 function init(){
   // Only show admin button if ?admin=true is in the URL
@@ -639,7 +656,7 @@ function init(){
   updateCountdown();
   setInterval(updateCountdown,1000);
 }
-function applyVisibility(){const secs=['home','countdown','details','schedule','legacy','rsvp','gallery'];const any=secs.some(s=>visibility[s]);const ov=document.getElementById('coming-soon'),nv=document.getElementById('main-nav'),ft=document.getElementById('main-footer');if(!any){ov.classList.remove('hidden');nv.style.display='none';ft.style.display='none';}else{ov.classList.add('hidden');nv.style.display='flex';ft.style.display='block';}secs.forEach(id=>{const el=document.getElementById(id);if(!el)return;visibility[id]?el.classList.add('visible'):el.classList.remove('visible');const ni=document.getElementById('nav-'+id);if(ni)ni.classList.toggle('hidden-page',!visibility[id]);});const rb=document.getElementById('hero-rsvp-btn'),db=document.getElementById('hero-details-btn');if(rb)rb.style.display=visibility.rsvp?'inline-block':'none';if(db)db.style.display=visibility.details?'inline-block':'none';if(adminUnlocked)syncAdminToggles();}
+function applyVisibility(){const secs=['home','countdown','details','schedule','legacy','rsvp','gallery','contact'];const any=secs.some(s=>visibility[s]);const ov=document.getElementById('coming-soon'),nv=document.getElementById('main-nav'),ft=document.getElementById('main-footer');if(!any){ov.classList.remove('hidden');nv.style.display='none';ft.style.display='none';}else{ov.classList.add('hidden');nv.style.display='flex';ft.style.display='block';}secs.forEach(id=>{const el=document.getElementById(id);if(!el)return;visibility[id]?el.classList.add('visible'):el.classList.remove('visible');const ni=document.getElementById('nav-'+id);if(ni)ni.classList.toggle('hidden-page',!visibility[id]);});const rb=document.getElementById('hero-rsvp-btn'),db=document.getElementById('hero-details-btn');if(rb)rb.style.display=visibility.rsvp?'inline-block':'none';if(db)db.style.display=visibility.details?'inline-block':'none';if(adminUnlocked)syncAdminToggles();}
 function toggleAdminPanel(){document.getElementById('admin-panel').classList.toggle('open');}
 function adminLogin(){const pw=document.getElementById('admin-pw').value,err=document.getElementById('admin-error');if(pw===ADMIN_PASSWORD){adminUnlocked=true;document.getElementById('admin-login-form').style.display='none';document.getElementById('admin-controls').style.display='block';syncAdminToggles();err.style.display='none';}else{err.style.display='block';document.getElementById('admin-pw').value='';}}
 function syncAdminToggles(){document.querySelectorAll('#admin-controls input[type="checkbox"]').forEach(cb=>{cb.checked=!!visibility[cb.dataset.section];});}
@@ -651,8 +668,29 @@ function changeGuests(delta){const n=guestCount+delta;if(n<0||n>10)return;delta>
 function addGuestCard(n){const list=document.getElementById('guest-list'),card=document.createElement('div');card.className='guest-card';card.dataset.n=n;card.innerHTML=`<div class="guest-card-head"><span class="guest-card-title">Guest ${n}</span><button type="button" class="remove-guest" onclick="removeGuest(${n})">✕</button></div><div class="form-row"><div class="form-field" id="gf-name-${n}"><label>Full Name <span class="req">*</span></label><input type="text" name="guest_${n}_name" placeholder="First Last"/><span class="field-error">Required</span></div><div class="form-field"><label>Age 13 or under?</label><select name="guest_${n}_child"><option value="">— Select —</option><option>No</option><option>Yes</option></select></div></div>`;list.appendChild(card);}
 function removeLastGuest(){const cards=document.getElementById('guest-list').querySelectorAll('.guest-card');if(cards.length)cards[cards.length-1].remove();}
 function removeGuest(n){document.querySelector(`.guest-card[data-n="${n}"]`)?.remove();guestCount--;document.getElementById('guest-count').textContent=guestCount;document.getElementById('guest-dec').disabled=guestCount===0;document.getElementById('guest-inc').disabled=guestCount===10;document.querySelectorAll('.guest-card').forEach((c,i)=>c.querySelector('.guest-card-title').textContent=`Guest ${i+1}`);}
-document.getElementById('rsvp-form').addEventListener('submit',async function(e){e.preventDefault();let valid=true;[{id:'ff-first',field:'first_name',type:'text'},{id:'ff-last',field:'last_name',type:'text'},{id:'ff-email',field:'email',type:'email'},{id:'ff-phone',field:'phone',type:'text'}].forEach(r=>{const el=this.querySelector(`[name="${r.field}"]`),wrap=document.getElementById(r.id);let ok=el.value.trim()!=='';if(r.type==='email')ok=ok&&/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value);wrap.classList.toggle('has-error',!ok);if(!ok)valid=false;});document.querySelectorAll('.guest-card').forEach(card=>{const n=card.dataset.n,nameEl=card.querySelector(`[name="guest_${n}_name"]`),wrap=document.getElementById(`gf-name-${n}`);if(nameEl&&wrap){const ok=nameEl.value.trim()!=='';wrap.classList.toggle('has-error',!ok);if(!ok)valid=false;}});if(!valid){document.querySelector('.has-error')?.scrollIntoView({behavior:'smooth',block:'center'});return;}const btn=this.querySelector('.rsvp-submit');btn.textContent='Sending…';btn.disabled=true;const guestParts=[];document.querySelectorAll('.guest-card').forEach(card=>{const n=card.dataset.n,name=card.querySelector(`[name="guest_${n}_name"]`)?.value||'',child=card.querySelector(`[name="guest_${n}_child"]`)?.value||'';if(name)guestParts.push(name+(child==='Yes'?' (child)':''));});const params=new URLSearchParams({first_name:this.querySelector('[name="first_name"]').value,last_name:this.querySelector('[name="last_name"]').value,email:this.querySelector('[name="email"]').value,phone:this.querySelector('[name="phone"]').value,sms_optin:this.querySelector('[name="sms_optin"]')?.checked?'Yes':'No',city:this.querySelector('[name="city"]').value,state:this.querySelector('[name="state"]').value,attendance:this.querySelector('[name="attendance"]:checked')?.value||'',attending_friday:this.querySelector('[name="attending_friday"]')?.checked?'Yes':'No',attending_saturday:this.querySelector('[name="attending_saturday"]')?.checked?'Yes':'No',guest_count:String(guestCount),total_registrants:String(this.querySelector('[name="attendance"]:checked')?.value==='Yes'?1+guestCount:0),guests:guestParts.join(' | '),committees:[...this.querySelectorAll('[name="committee"]:checked')].map(c=>c.value).join(' | '),dietary:this.querySelector('[name="dietary"]').value,message:this.querySelector('[name="message"]').value});try{await fetch(this.action,{method:'POST',body:params,headers:{'Content-Type':'application/x-www-form-urlencoded'},mode:'no-cors'});this.style.display='none';document.getElementById('rsvp-intro').style.display='none';document.getElementById('rsvp-success').style.display='block';window.scrollTo({top:document.getElementById('rsvp').offsetTop-80,behavior:'smooth'});}catch(err){btn.textContent='Send My RSVP ✦';btn.disabled=false;alert('Something went wrong. Please try again.');}}); 
+document.getElementById('rsvp-form').addEventListener('submit',async function(e){e.preventDefault();let valid=true;[{id:'ff-first',field:'first_name',type:'text'},{id:'ff-last',field:'last_name',type:'text'},{id:'ff-email',field:'email',type:'email'},{id:'ff-phone',field:'phone',type:'text'}].forEach(r=>{const el=this.querySelector(`[name="${r.field}"]`),wrap=document.getElementById(r.id);let ok=el.value.trim()!=='';if(r.type==='email')ok=ok&&/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value);wrap.classList.toggle('has-error',!ok);if(!ok)valid=false;});document.querySelectorAll('.guest-card').forEach(card=>{const n=card.dataset.n,nameEl=card.querySelector(`[name="guest_${n}_name"]`),wrap=document.getElementById(`gf-name-${n}`);if(nameEl&&wrap){const ok=nameEl.value.trim()!=='';wrap.classList.toggle('has-error',!ok);if(!ok)valid=false;}});if(!valid){document.querySelector('.has-error')?.scrollIntoView({behavior:'smooth',block:'center'});return;}const btn=this.querySelector('.rsvp-submit');btn.textContent='Sending…';btn.disabled=true;const guestParts=[];document.querySelectorAll('.guest-card').forEach(card=>{const n=card.dataset.n,name=card.querySelector(`[name="guest_${n}_name"]`)?.value||'',child=card.querySelector(`[name="guest_${n}_child"]`)?.value||'';if(name)guestParts.push(name+(child==='Yes'?' (child)':''));});const params=new URLSearchParams({first_name:this.querySelector('[name="first_name"]').value,last_name:this.querySelector('[name="last_name"]').value,email:this.querySelector('[name="email"]').value,phone:this.querySelector('[name="phone"]').value,sms_optin:this.querySelector('[name="sms_optin"]')?.checked?'Yes':'No',city:this.querySelector('[name="city"]').value,state:this.querySelector('[name="state"]').value,attendance:this.querySelector('[name="attendance"]:checked')?.value||'',attending_friday:this.querySelector('[name="attending_friday"]')?.checked?'Yes':'No',attending_saturday:this.querySelector('[name="attending_saturday"]')?.checked?'Yes':'No',guest_count:String(guestCount),total_registrants:String(this.querySelector('[name="attendance"]:checked')?.value==='Yes'?1+guestCount:0),guests:guestParts.join(' | '),committees:[...this.querySelectorAll('[name="committee"]:checked')].map(c=>c.value).join(' | '),dietary:this.querySelector('[name="dietary"]').value,message:this.querySelector('[name="message"]').value});const att=this.querySelector('[name="attendance"]:checked')?.value||'';try{await fetch(this.action,{method:'POST',body:params,headers:{'Content-Type':'application/x-www-form-urlencoded'},mode:'no-cors'});this.style.display='none';document.getElementById('rsvp-intro').style.display='none';const st=document.getElementById('rsvp-success-title'),sm=document.getElementById('rsvp-success-msg');if(att==='Yes'){st.textContent="You're on the List!";sm.textContent="Your RSVP has been received. We'll be in touch with more details soon. Can't wait to see you \u2014 July 10\u201311 in Erwin, NC!";}else if(att==='Maybe'){st.textContent='Thanks for Letting Us Know!';sm.textContent="We hope you can make it! We'll keep you in the loop with updates. If your plans change, just let us know.";}else{st.textContent='We\u2019ll Miss You!';sm.textContent="Thanks for letting us know. We\u2019re sorry you can\u2019t make it this year, but we hope to see you at a future reunion. Stay connected!";}document.getElementById('rsvp-success').style.display='block';window.scrollTo({top:document.getElementById('rsvp').offsetTop-80,behavior:'smooth'});}catch(err){btn.textContent='Send My RSVP ✦';btn.disabled=false;alert('Something went wrong. Please try again.');}}); 
 init();
+
+// ── RSVP attendance toggle ──
+(function(){
+  const radios = document.querySelectorAll('[name="attendance"]');
+  const attendingSections = document.querySelectorAll('.rsvp-attending-section');
+  const daysField = document.getElementById('attending-days-field');
+  const submitBtn = document.getElementById('rsvp-submit-btn');
+  const messageTitle = document.getElementById('rsvp-message-title');
+
+  function toggleAttendance(){
+    const val = document.querySelector('[name="attendance"]:checked')?.value;
+    const isNo = val === 'No';
+    attendingSections.forEach(el => el.style.display = isNo ? 'none' : 'block');
+    if (daysField) daysField.style.display = isNo ? 'none' : 'block';
+    submitBtn.textContent = isNo ? 'Send My Response' : 'Send My RSVP ✦';
+    messageTitle.innerHTML = isNo ? '<span class="num">2</span> Message to the Family' : '<span class="num">5</span> Message to the Family';
+  }
+
+  radios.forEach(r => r.addEventListener('change', toggleAttendance));
+  toggleAttendance();
+})();
 
 // ── Carousel ──
 (function(){
@@ -663,13 +701,18 @@ init();
 
   // ── Load approved photos from Google Sheet ──
   // Set this to your published Google Apps Script web app URL
-  const GALLERY_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxL-oie4zV-VFtqM6NQv-snsG3A4lupfq4CBKcqK7zGin7NlV2Vyowlyux2zcY-XjPhKg/exec';
+  const GALLERY_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwOw3iy2WlO_GJH5fYyGTWy7xLirKn-iyK71fZVPipMNZexswIOp9PvnQE3XQEjWcFBrA/exec';
 
   function loadApprovedPhotos(){
-    if (!GALLERY_SCRIPT_URL) return;
+    var emptyEl = document.getElementById('gallery-empty');
+    var outerEl = document.getElementById('carousel-outer');
+    var navEl = document.querySelector('.carousel-nav');
+    if (!GALLERY_SCRIPT_URL) { emptyEl.style.display = 'block'; outerEl.style.display = 'none'; if(navEl)navEl.style.display='none'; return; }
     fetch(GALLERY_SCRIPT_URL)
       .then(r => r.json())
       .then(photos => {
+        if (!photos.length) { emptyEl.style.display = 'block'; outerEl.style.display = 'none'; if(navEl)navEl.style.display='none'; return; }
+        emptyEl.style.display = 'none'; outerEl.style.display = 'block'; if(navEl)navEl.style.display='flex';
         photos.forEach(p => {
           const slide = document.createElement('div');
           slide.className = 'carousel-slide';
@@ -681,7 +724,7 @@ init();
         buildDots();
         goTo(0);
       })
-      .catch(() => {});
+      .catch(() => { emptyEl.style.display = 'block'; outerEl.style.display = 'none'; if(navEl)navEl.style.display='none'; });
   }
 
   function slidesPerView(){
@@ -736,7 +779,7 @@ init();
 
 // ── Photo Upload ──
 (function(){
-  const PHOTO_UPLOAD_URL = 'https://script.google.com/macros/s/AKfycbxqzhvkYvebOHPoI03lztxbyetaro71Qcj_Y7xdj_q79ncf5Nv72ztRXmH8V3_XeActtg/exec';
+  const PHOTO_UPLOAD_URL = 'https://script.google.com/macros/s/AKfycbwOw3iy2WlO_GJH5fYyGTWy7xLirKn-iyK71fZVPipMNZexswIOp9PvnQE3XQEjWcFBrA/exec';
   const dropzone = document.getElementById('photo-dropzone');
   const fileInput = document.getElementById('photo-file-input');
   const previewsEl = document.getElementById('photo-previews');
