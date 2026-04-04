@@ -248,6 +248,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:ce
 .gallery-upload-note{text-align:center;margin-top:1.25rem;font-size:0.82rem;color:var(--text-lt);line-height:1.7;}
 .gallery-upload-note strong{color:var(--navy);}
 
+/* CONTACT */
+#contact{padding:5.5rem 2rem;background:var(--cream);}
+.contact-card{max-width:500px;margin:2rem auto 0;background:var(--white);border:1px solid var(--border);border-top:3px solid var(--gold);border-radius:2px;padding:2rem;text-align:center;}
+.contact-card .contact-icon{font-size:2rem;margin-bottom:0.75rem;display:block;}
+.contact-card h3{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;color:var(--navy);margin-bottom:0.5rem;}
+.contact-card p{font-size:0.88rem;color:var(--text-lt);line-height:1.7;margin-bottom:1rem;}
+.contact-card a.contact-email{display:inline-block;background:var(--navy);color:#fff;font-family:'Montserrat',sans-serif;font-size:0.68rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;padding:0.75rem 1.8rem;border-radius:2px;text-decoration:none;transition:all 0.25s;}
+.contact-card a.contact-email:hover{background:var(--navy-lt);transform:translateY(-2px);}
+
 /* FOOTER */
 footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2rem;text-align:center;}
 .footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;color:var(--gold);margin-bottom:0.25rem;}
@@ -299,6 +308,7 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
     <li id="nav-details" class="hidden-page"><a href="#details">Details</a></li>
     <li id="nav-legacy" class="hidden-page"><a href="#legacy">Our Legacy</a></li>
     <li id="nav-gallery" class="hidden-page"><a href="#gallery">Gallery</a></li>
+    <li id="nav-contact" class="hidden-page"><a href="#contact">Contact</a></li>
     <li id="nav-rsvp" class="hidden-page"><a href="#rsvp" class="rsvp-link">RSVP</a></li>
   </ul>
   <div class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
@@ -584,6 +594,22 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
   </div>
 </section>
 
+<!-- CONTACT -->
+<section class="site-section" id="contact">
+  <div class="section-wrap">
+    <div class="section-header">
+      <span class="section-eye">Get In Touch</span>
+      <h2 class="section-h2">Questions? <em>We're Here.</em></h2>
+    </div>
+    <div class="contact-card">
+      <span class="contact-icon">&#9993;</span>
+      <h3>George Barnes Family Reunion Committee</h3>
+      <p>Have a question about the reunion, need help with your RSVP, or just want to say hello? Drop us a line and we'll get back to you.</p>
+      <a class="contact-email" href="mailto:g.barnes.family@gmail.com">Email Us</a>
+    </div>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer id="main-footer" style="display:none;">
   <div class="footer-logo">George Barnes Family Reunion</div>
@@ -591,7 +617,7 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
   <ul class="footer-links">
     <li><a href="#home">Home</a></li><li><a href="#details">Details</a></li>
     <li><a href="#schedule">Schedule</a></li><li><a href="#legacy">Our Legacy</a></li>
-    <li><a href="#gallery">Gallery</a></li><li><a href="#rsvp">RSVP</a></li>
+    <li><a href="#gallery">Gallery</a></li><li><a href="#contact">Contact</a></li><li><a href="#rsvp">RSVP</a></li>
   </ul>
   <p class="footer-copy">© 2026 George Barnes Family Reunion Committee</p>
 </footer>
@@ -614,6 +640,7 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
     <div class="admin-row"><span class="admin-row-label">Our Legacy</span><label class="toggle-switch"><input type="checkbox" data-section="legacy" onchange="adminToggle(this)"/><span class="toggle-slider"></span></label></div>
     <div class="admin-row"><span class="admin-row-label">RSVP / Registration</span><label class="toggle-switch"><input type="checkbox" data-section="rsvp" onchange="adminToggle(this)"/><span class="toggle-slider"></span></label></div>
     <div class="admin-row"><span class="admin-row-label">Photo Gallery</span><label class="toggle-switch"><input type="checkbox" data-section="gallery" onchange="adminToggle(this)"/><span class="toggle-slider"></span></label></div>
+    <div class="admin-row"><span class="admin-row-label">Contact</span><label class="toggle-switch"><input type="checkbox" data-section="contact" onchange="adminToggle(this)"/><span class="toggle-slider"></span></label></div>
     <button id="admin-save-btn" onclick="adminSave()">Save &amp; Publish Changes</button>
   </div>
 </div>
@@ -629,7 +656,7 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
 
 <script>
 const ADMIN_PASSWORD='Reunion2026';
-const DEFAULT_VISIBILITY={home:true,countdown:false,details:true,schedule:true,legacy:true,rsvp:true,gallery:true};
+const DEFAULT_VISIBILITY={home:true,countdown:false,details:true,schedule:true,legacy:true,rsvp:true,gallery:true,contact:true};
 let visibility={},adminUnlocked=false,guestCount=0;
 function init(){
   // Only show admin button if ?admin=true is in the URL
@@ -642,7 +669,7 @@ function init(){
   updateCountdown();
   setInterval(updateCountdown,1000);
 }
-function applyVisibility(){const secs=['home','countdown','details','schedule','legacy','rsvp','gallery'];const any=secs.some(s=>visibility[s]);const ov=document.getElementById('coming-soon'),nv=document.getElementById('main-nav'),ft=document.getElementById('main-footer');if(!any){ov.classList.remove('hidden');nv.style.display='none';ft.style.display='none';}else{ov.classList.add('hidden');nv.style.display='flex';ft.style.display='block';}secs.forEach(id=>{const el=document.getElementById(id);if(!el)return;visibility[id]?el.classList.add('visible'):el.classList.remove('visible');const ni=document.getElementById('nav-'+id);if(ni)ni.classList.toggle('hidden-page',!visibility[id]);});const rb=document.getElementById('hero-rsvp-btn'),db=document.getElementById('hero-details-btn');if(rb)rb.style.display=visibility.rsvp?'inline-block':'none';if(db)db.style.display=visibility.details?'inline-block':'none';if(adminUnlocked)syncAdminToggles();}
+function applyVisibility(){const secs=['home','countdown','details','schedule','legacy','rsvp','gallery','contact'];const any=secs.some(s=>visibility[s]);const ov=document.getElementById('coming-soon'),nv=document.getElementById('main-nav'),ft=document.getElementById('main-footer');if(!any){ov.classList.remove('hidden');nv.style.display='none';ft.style.display='none';}else{ov.classList.add('hidden');nv.style.display='flex';ft.style.display='block';}secs.forEach(id=>{const el=document.getElementById(id);if(!el)return;visibility[id]?el.classList.add('visible'):el.classList.remove('visible');const ni=document.getElementById('nav-'+id);if(ni)ni.classList.toggle('hidden-page',!visibility[id]);});const rb=document.getElementById('hero-rsvp-btn'),db=document.getElementById('hero-details-btn');if(rb)rb.style.display=visibility.rsvp?'inline-block':'none';if(db)db.style.display=visibility.details?'inline-block':'none';if(adminUnlocked)syncAdminToggles();}
 function toggleAdminPanel(){document.getElementById('admin-panel').classList.toggle('open');}
 function adminLogin(){const pw=document.getElementById('admin-pw').value,err=document.getElementById('admin-error');if(pw===ADMIN_PASSWORD){adminUnlocked=true;document.getElementById('admin-login-form').style.display='none';document.getElementById('admin-controls').style.display='block';syncAdminToggles();err.style.display='none';}else{err.style.display='block';document.getElementById('admin-pw').value='';}}
 function syncAdminToggles(){document.querySelectorAll('#admin-controls input[type="checkbox"]').forEach(cb=>{cb.checked=!!visibility[cb.dataset.section];});}
