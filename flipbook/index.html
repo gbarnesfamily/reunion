@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>George Barnes Family — Family Flipbook</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy: #1E3A5F;
+  --navy-mid: #2a4f82;
+  --gold: #A8841E;
+  --gold-light: #C9A84C;
+  --gold-pale: #F5EDD6;
+  --cream: #FAFAF8;
+  --white: #ffffff;
+  --text: #1a1a1a;
+  --text-mid: #4a4a4a;
+  --text-light: #767676;
+  --border: #E2DDD6;
+  --border-strong: #C8C0B4;
+  --sidebar-w: 280px;
+}
+
+body { font-family: 'Inter', system-ui, sans-serif; background: var(--navy); color: var(--text); min-height: 100vh; }
+
+.sidebar { width: var(--sidebar-w); flex-shrink: 0; background: var(--navy); min-height: 100vh; position: fixed; top: 0; left: 0; bottom: 0; overflow-y: auto; display: flex; flex-direction: column; z-index: 100; }
+.sidebar-brand { padding: 24px 20px 16px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+.sidebar-brand h1 { font-family: 'Playfair Display', serif; font-size: 18px; color: #fff; line-height: 1.3; margin-bottom: 4px; }
+.sidebar-brand p { font-size: 11px; color: rgba(255,255,255,0.5); letter-spacing: 0.05em; }
+
+.sidebar-search { padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.sidebar-search input { width: 100%; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; padding: 7px 10px; color: #fff; font-size: 13px; outline: none; font-family: 'Inter', sans-serif; }
+.sidebar-search input::placeholder { color: rgba(255,255,255,0.4); }
+.sidebar-search input:focus { border-color: var(--gold-light); background: rgba(255,255,255,0.12); }
+
+.toc { flex: 1; padding: 8px 0 24px; }
+.toc-gen-header { font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold-light); padding: 14px 16px 4px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px; user-select: none; }
+.toc-gen-header:hover { color: #fff; }
+.toc-gen-arrow { font-size: 8px; opacity: 0.7; display: inline-block; width: 10px; }
+.toc-item { display: flex; align-items: center; gap: 10px; padding: 8px 16px; cursor: pointer; border-left: 3px solid transparent; transition: background 0.15s; }
+.toc-item.gen-hidden { display: none !important; }
+.toc-item:hover { background: rgba(255,255,255,0.07); }
+.toc-item.active { background: rgba(201,168,76,0.15); border-left-color: var(--gold-light); }
+.toc-name { font-size: 13px; color: rgba(255,255,255,0.85); line-height: 1.3; flex: 1; }
+.toc-item.active .toc-name { color: #fff; font-weight: 500; }
+.toc-years { font-size: 11px; color: rgba(255,255,255,0.35); white-space: nowrap; }
+
+.main-wrap { margin-left: var(--sidebar-w); flex: 1; min-height: 100vh; display: flex; flex-direction: column; }
+
+.top-strip { background: var(--white); border-bottom: 1px solid var(--border); padding: 12px 32px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 50; }
+.top-strip-title { font-size: 13px; color: var(--text-mid); font-weight: 500; }
+.top-strip-nav { display: flex; gap: 8px; align-items: center; }
+.nav-btn { background: none; border: 1px solid var(--border-strong); border-radius: 6px; padding: 5px 14px; font-size: 13px; color: var(--navy); cursor: pointer; font-family: 'Inter', sans-serif; transition: all 0.15s; }
+.nav-btn:hover { background: var(--navy); color: #fff; border-color: var(--navy); }
+.nav-btn:disabled { opacity: 0.3; cursor: default; }
+.page-counter { font-size: 12px; color: var(--text-light); padding: 0 6px; }
+
+.page-content { flex: 1; padding: 40px 48px 60px; max-width: 820px; }
+
+.person-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; margin-bottom: 0; }
+.person-header-left { flex: 1; }
+.gen-badge { display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); background: var(--gold-pale); padding: 3px 10px; border-radius: 20px; margin-bottom: 10px; }
+.person-name { font-family: 'Playfair Display', serif; font-size: 34px; font-weight: 700; color: var(--navy); line-height: 1.15; margin-bottom: 6px; }
+.person-years { font-size: 16px; color: var(--text-light); font-weight: 300; margin-bottom: 8px; letter-spacing: 0.02em; }
+.person-tag { font-size: 13px; color: var(--text-mid); font-style: italic; }
+.photo-circle { width: 90px; height: 90px; border-radius: 50%; border: 2px solid var(--border); background: var(--cream); display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--border-strong); font-size: 9px; gap: 4px; flex-shrink: 0; overflow: hidden; }
+.photo-circle img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.header-rule { height: 2px; background: linear-gradient(to right, var(--navy), var(--gold), transparent); margin: 18px 0 24px; border-radius: 1px; }
+
+.story-block { background: var(--white); border: 1px solid var(--border); border-left: 3px solid var(--gold); border-radius: 8px; padding: 20px 24px; margin-bottom: 28px; }
+.story-label { font-size: 10px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+.story-text { font-size: 14.5px; line-height: 1.8; color: var(--text-mid); font-style: italic; }
+
+.facts-row { display: flex; gap: 12px; margin-bottom: 28px; flex-wrap: wrap; }
+.fact-item { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 12px 16px; flex: 1; min-width: 140px; }
+.fact-icon { font-size: 18px; margin-bottom: 4px; display: block; }
+.fact-label { font-size: 9px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-light); margin-bottom: 3px; }
+.fact-val { font-size: 13px; color: var(--navy); font-weight: 500; }
+
+.section-block { margin-bottom: 28px; }
+.section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--navy); margin-bottom: 12px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
+
+.parent-row { display: flex; gap: 12px; flex-wrap: wrap; }
+.parent-card { display: flex; align-items: center; gap: 10px; background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 10px 16px; flex: 1; min-width: 180px; }
+.parent-init { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 700; flex-shrink: 0; color: #fff; }
+.navy-init { background: var(--navy); }
+.gold-init { background: var(--gold); }
+.prel { font-size: 9px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-light); margin-bottom: 2px; }
+.pname { font-size: 13px; color: var(--navy); font-weight: 500; }
+
+.spouse-block { background: var(--white); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 16px; }
+.spouse-header { background: #F0F4F9; border-bottom: 1px solid var(--border); padding: 12px 16px; display: flex; align-items: center; gap: 12px; }
+.spouse-init { width: 38px; height: 38px; border-radius: 50%; background: var(--navy); color: #fff; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 700; flex-shrink: 0; }
+.spouse-info { flex: 1; }
+.spouse-role { font-size: 9px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-light); margin-bottom: 2px; }
+.spouse-name { font-size: 15px; color: var(--navy); font-weight: 600; margin-bottom: 2px; }
+.spouse-sub { font-size: 11px; color: var(--text-light); font-style: italic; }
+.spouse-marr { font-size: 11px; color: var(--gold); font-weight: 500; margin-top: 2px; }
+
+.kids-table { width: 100%; border-collapse: collapse; }
+.kids-table thead th { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-light); padding: 8px 14px; text-align: left; background: #FAFAF8; border-bottom: 1px solid var(--border); }
+.kids-table tbody td { padding: 10px 14px; border-bottom: 1px solid var(--border); font-size: 13.5px; vertical-align: middle; }
+.kids-table tbody tr:last-child td { border-bottom: none; }
+.kid-num { color: var(--gold); font-weight: 600; width: 32px; font-size: 13px; }
+.kid-yrs { color: var(--text-light); font-size: 12px; width: 100px; text-align: right; }
+.child-link { color: var(--navy); font-weight: 500; text-decoration: none; border-bottom: 1px solid var(--gold-light); transition: color 0.15s; }
+.child-link:hover { color: var(--gold); }
+.child-plain { color: var(--text); }
+.no-kids { padding: 12px 14px; color: var(--text-light); font-style: italic; font-size: 13px; }
+
+.sidebar-toggle { display: none; position: fixed; bottom: 20px; right: 20px; z-index: 200; background: var(--navy); color: #fff; border: none; border-radius: 50%; width: 50px; height: 50px; font-size: 22px; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+.sidebar-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 90; }
+
+@media (prefers-color-scheme: dark) {
+  :root { --cream: #141210; --white: #1e1a16; --text: #e8e0d4; --text-mid: #b0a090; --text-light: #807060; --border: #2e2820; --border-strong: #3e3428; --gold-pale: #2a220e; }
+  .top-strip { background: #1e1a16; border-color: var(--border); }
+  .spouse-header { background: #252118; }
+  .kids-table thead th { background: #1e1a16; }
+}
+
+@media (max-width: 768px) {
+  :root { --sidebar-w: 260px; }
+  .sidebar { transform: translateX(-100%); transition: transform 0.25s ease; }
+  .sidebar.open { transform: translateX(0); }
+  .sidebar-overlay.open { display: block; }
+  .sidebar-toggle { display: flex; align-items: center; justify-content: center; }
+  .main-wrap { margin-left: 0; }
+  .page-content { padding: 24px 20px 48px; }
+  .top-strip { padding: 10px 16px; }
+}
+
+@media (max-width: 480px) {
+  .person-name { font-size: 26px; }
+  .photo-circle { width: 70px; height: 70px; }
+  .facts-row { flex-direction: column; }
+  .parent-row { flex-direction: column; }
+}
+
+#pw-gate { position: fixed; inset: 0; background: var(--navy); display: flex; align-items: center; justify-content: center; z-index: 9999; }
+.pw-box { background: #fff; border-radius: 14px; padding: 48px 40px; max-width: 380px; width: 90%; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+.pw-title { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+.pw-sub { font-size: 13px; color: #767676; margin-bottom: 28px; }
+.pw-box input { width: 100%; border: 1.5px solid #d0ccc4; border-radius: 8px; padding: 11px 14px; font-size: 16px; font-family: 'Inter', sans-serif; text-align: center; letter-spacing: 0.08em; outline: none; margin-bottom: 14px; color: var(--navy); transition: border-color 0.2s; }
+.pw-box input:focus { border-color: var(--navy); }
+.pw-btn { width: 100%; background: var(--navy); color: #fff; border: none; border-radius: 8px; padding: 12px; font-size: 15px; font-weight: 600; font-family: 'Inter', sans-serif; cursor: pointer; transition: background 0.2s; }
+.pw-btn:hover { background: #2a4f82; }
+.pw-error { font-size: 12px; color: #c0392b; margin-top: 10px; min-height: 16px; }
+.pw-gold-bar { width: 48px; height: 3px; background: var(--gold); border-radius: 2px; margin: 0 auto 20px; }
+#app { display: none; background: var(--cream); }
+#app.unlocked { display: flex; width: 100%; min-height: 100vh; }
+</style>
+</head>
+<body>
+
+<div id="pw-gate">
+  <div class="pw-box">
+    <div class="pw-gold-bar"></div>
+    <div class="pw-title">George Barnes Family</div>
+    <p class="pw-sub">Family Flipbook &mdash; Private</p>
+    <input type="password" id="pw-input" placeholder="Enter password" autocomplete="off">
+    <button class="pw-btn" onclick="checkPassword()">Enter</button>
+    <div class="pw-error" id="pw-error"></div>
+  </div>
+</div>
+
+<div id="app">
+  <nav class="sidebar" id="sidebar" aria-label="Family members">
+    <div class="sidebar-brand">
+      <h1>George Barnes Family</h1>
+      <p>Family Flipbook</p>
+    </div>
+    <div class="sidebar-search">
+      <input type="text" id="toc-search" placeholder="Search family members..." aria-label="Search family members" oninput="filterTOC(this.value)">
+    </div>
+    <div class="toc" id="toc" role="list"></div>
+  </nav>
+  <div class="sidebar-overlay" id="overlay" onclick="closeSidebar()"></div>
+
+  <div class="main-wrap">
+    <div class="top-strip">
+      <div class="top-strip-title" id="current-title">George Barnes Family</div>
+      <div class="top-strip-nav">
+        <button class="nav-btn" id="btn-prev" onclick="navigate(-1)" aria-label="Previous">&#8592; Prev</button>
+        <span class="page-counter" id="page-counter">1 / 37</span>
+        <button class="nav-btn" id="btn-next" onclick="navigate(1)" aria-label="Next">Next &#8594;</button>
+      </div>
+    </div>
+    <div class="page-content" id="page-content" role="main"></div>
+  </div>
+
+  <button class="sidebar-toggle" onclick="toggleSidebar()" aria-label="Toggle menu">&#9776;</button>
+</div>
+
+<script src="data.js"></script>
+<script>
+// ─────────────────────────────────────────────────────────────────────────────
+// CUSTOMIZATION MAPS — edit these to add photos, marriage dates, etc.
+// ─────────────────────────────────────────────────────────────────────────────
+
+// PHOTOS: page index → photo path. Drop files in photos/ folder.
+const PHOTOS = {
+  // 0: 'photos/george-barnes.jpg',
+};
+
+// MARRIAGES: spouse name (or "pageIdx:SpouseName") → marriage date string.
+const MARRIAGES = {
+  // "Adeline Bryant Barnes": "15 Jun 1888",
+};
+
+// Generation labels
+const GEN_LABELS = {
+  1: 'First Generation',
+  2: 'Second Generation Descendants',
+  3: 'Third Generation Descendants',
+  4: 'Fourth Generation Descendants',
+  5: 'Fifth Generation Descendants',
+  6: 'Sixth Generation Descendants'
+};
+const BADGE_LABELS = {
+  1: 'First Generation',
+  2: 'Second Generation Descendant',
+  3: 'Third Generation Descendant',
+  4: 'Fourth Generation Descendant',
+  5: 'Fifth Generation Descendant',
+  6: 'Sixth Generation Descendant'
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+// DATA — from GEDCOM. Regenerate from the source if you need to change it.
+// ─────────────────────────────────────────────────────────────────────────────
+// PAGES and TOC are loaded from data.js (included via <script src="data.js"> above).
+// If you're opening index.html directly, make sure data.js exists in the same folder.
+if (typeof PAGES === 'undefined' || typeof TOC === 'undefined') {
+  document.getElementById('pw-gate').innerHTML =
+    '<div class="pw-box"><div class="pw-title" style="color:#c0392b">Missing data.js</div>' +
+    '<p class="pw-sub">The flipbook data file is missing. Please make sure data.js is in the same folder as index.html.</p></div>';
+  throw new Error('data.js not loaded');
+}
+
+let currentIdx = 0;
+const collapsedGens = new Set();
+
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function buildTOC(filter) {
+  const toc = document.getElementById('toc');
+  toc.innerHTML = '';
+  let lastGen = null;
+
+  TOC.forEach((item) => {
+    if (filter && !item.name.toLowerCase().includes(filter.toLowerCase())) return;
+
+    if (item.gen !== lastGen) {
+      lastGen = item.gen;
+      const genLabel = GEN_LABELS[item.gen] || ('Generation ' + item.gen);
+      const isCollapsed = collapsedGens.has(item.gen);
+
+      const header = document.createElement('div');
+      header.className = 'toc-gen-header';
+      header.dataset.gen = item.gen;
+      header.innerHTML =
+        '<span class="toc-gen-arrow">' + (isCollapsed ? '\u25B6' : '\u25BC') + '</span>' +
+        '<span>' + genLabel + '</span>';
+      header.onclick = () => toggleGen(item.gen);
+      toc.appendChild(header);
+    }
+
+    const el = document.createElement('div');
+    el.className = 'toc-item' + (item.idx === currentIdx ? ' active' : '') +
+                   (collapsedGens.has(item.gen) ? ' gen-hidden' : '');
+    el.setAttribute('role', 'listitem');
+    el.setAttribute('tabindex', '0');
+    el.dataset.idx = item.idx;
+    el.dataset.gen = item.gen;
+    el.innerHTML = '<span class="toc-name">' + escHtml(item.name) + '</span>' +
+      (item.years ? '<span class="toc-years">' + escHtml(item.years) + '</span>' : '');
+    el.onclick = () => { showPage(item.idx); if (window.innerWidth <= 768) closeSidebar(); };
+    el.onkeydown = (e) => { if (e.key === 'Enter') el.click(); };
+    toc.appendChild(el);
+  });
+}
+
+function toggleGen(gen) {
+  if (collapsedGens.has(gen)) collapsedGens.delete(gen);
+  else collapsedGens.add(gen);
+  buildTOC(document.getElementById('toc-search').value);
+}
+
+function showPage(idx) {
+  currentIdx = idx;
+  const page = PAGES[idx];
+  const content = document.getElementById('page-content');
+  content.innerHTML = page.html;
+
+  // Update generation badge to include "Descendant(s)"
+  const badge = content.querySelector('.gen-badge');
+  if (badge && BADGE_LABELS[page.gen]) {
+    badge.textContent = BADGE_LABELS[page.gen];
+  }
+
+  // Replace the photo-circle with an <img> if we have a photo for this person
+  const photoUrl = PHOTOS[idx];
+  if (photoUrl) {
+    const circle = content.querySelector('.photo-circle');
+    if (circle) {
+      circle.innerHTML = '';
+      const img = document.createElement('img');
+      img.src = photoUrl;
+      img.alt = page.name;
+      img.onerror = () => {
+        circle.innerHTML = '<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Photo</span>';
+      };
+      circle.appendChild(img);
+    }
+  }
+
+  // Inject marriage dates into spouse blocks
+  content.querySelectorAll('.spouse-block').forEach(block => {
+    const nameEl = block.querySelector('.spouse-name');
+    if (!nameEl) return;
+    const spouseName = nameEl.textContent.trim();
+    const date = MARRIAGES[idx + ':' + spouseName] || MARRIAGES[spouseName];
+    if (date) {
+      const info = block.querySelector('.spouse-info');
+      if (info && !info.querySelector('.spouse-marr')) {
+        const marrEl = document.createElement('div');
+        marrEl.className = 'spouse-marr';
+        marrEl.textContent = 'Married ' + date;
+        info.appendChild(marrEl);
+      }
+    }
+  });
+
+  document.getElementById('current-title').textContent = page.name;
+  document.getElementById('page-counter').textContent = (idx + 1) + ' / ' + PAGES.length;
+  document.getElementById('btn-prev').disabled = idx === 0;
+  document.getElementById('btn-next').disabled = idx === PAGES.length - 1;
+
+  document.querySelectorAll('.toc-item').forEach(el => {
+    el.classList.toggle('active', parseInt(el.dataset.idx) === idx);
+  });
+  const activeEl = document.querySelector('.toc-item.active');
+  if (activeEl) activeEl.scrollIntoView({ block: 'nearest' });
+  document.querySelector('.main-wrap').scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function navigate(dir) {
+  const next = currentIdx + dir;
+  if (next >= 0 && next < PAGES.length) showPage(next);
+}
+
+function filterTOC(val) { buildTOC(val); }
+
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('open');
+}
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('open');
+}
+
+document.addEventListener('keydown', e => {
+  if (e.target.tagName === 'INPUT') return;
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') navigate(1);
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') navigate(-1);
+});
+
+// Password gate
+const PASSWORD = 'barnes2026';
+function checkPassword() {
+  const input = document.getElementById('pw-input').value;
+  if (input === PASSWORD) {
+    document.getElementById('pw-gate').style.display = 'none';
+    document.getElementById('app').classList.add('unlocked');
+    buildTOC();
+    showPage(0);
+  } else {
+    document.getElementById('pw-error').textContent = 'Incorrect password. Please try again.';
+    document.getElementById('pw-input').value = '';
+    document.getElementById('pw-input').focus();
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  const pw = document.getElementById('pw-input');
+  if (pw) pw.addEventListener('keydown', e => { if (e.key === 'Enter') checkPassword(); });
+});
+</script>
+</body>
+</html>
