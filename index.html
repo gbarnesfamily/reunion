@@ -28,6 +28,12 @@
 html{scroll-behavior:smooth;}
 body{background:var(--cream);color:var(--text);font-family:'Lato',sans-serif;font-weight:300;overflow-x:hidden;}
 
+/* Accessibility */
+.skip-link{position:absolute;top:-40px;left:0;background:var(--navy);color:var(--gold);padding:0.75rem 1.25rem;text-decoration:none;font-family:'Montserrat',sans-serif;font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;z-index:10000;border-radius:0 0 3px 0;}
+.skip-link:focus{top:0;outline:2px solid var(--gold);}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+
 .section-eye{font-family:'Montserrat',sans-serif;font-size:0.75rem;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold-dk);margin-bottom:0.6rem;display:block;}
 .section-h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;color:var(--navy);line-height:1.1;margin-bottom:1rem;}
 .section-h2 em{color:var(--orange);font-style:italic;}
@@ -291,9 +297,12 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
   <div class="coming-soon-dates">July 10–11, 2026 &nbsp;·&nbsp; Erwin, NC</div>
 </div>
 
+<!-- SKIP LINK -->
+<a href="#home" class="skip-link">Skip to main content</a>
+
 <!-- NAV -->
-<nav id="main-nav" style="display:none;">
-  <a href="#home" class="nav-logo"></a>
+<nav id="main-nav" style="display:none;" aria-label="Primary">
+  <a href="#home" class="nav-logo" aria-label="Home"></a>
   <ul class="nav-links" id="nav-links">
     <li id="nav-home"><a href="#home">Home</a></li>
     <li id="nav-details" class="hidden-page"><a href="#details">Details</a></li>
@@ -302,8 +311,11 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
     <li id="nav-contact" class="hidden-page"><a href="#contact">Contact</a></li>
     <li id="nav-rsvp" class="hidden-page"><a href="#rsvp" class="rsvp-link">RSVP</a></li>
   </ul>
-  <div class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links" type="button"><span></span><span></span><span></span></button>
 </nav>
+
+<!-- MAIN CONTENT -->
+<main id="main-content">
 
 <!-- HOME -->
 <section class="site-section" id="home">
@@ -441,42 +453,42 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
       <span class="section-eye">RSVP</span>
       <h2 class="section-h2">We'd Love to <em>See You!</em></h2>
     </div>
-    <div id="rsvp-success"><h3 id="rsvp-success-title"></h3><p id="rsvp-success-msg"></p></div>
+    <div id="rsvp-success" role="status" aria-live="polite"><h3 id="rsvp-success-title"></h3><p id="rsvp-success-msg"></p></div>
     <form id="rsvp-form" action="https://script.google.com/macros/s/AKfycbx-aQ3prQu7IlxbuDWR9242CK-r8eKNozal1B61SXrre1ZV3yNpisJUph4dqaLtiaJMIg/exec" method="POST" novalidate>
       <div class="rsvp-form-wrap">
         <div class="form-card">
           <div class="form-card-title"><span class="num">1</span> Your Information</div>
           <div class="form-row">
-            <div class="form-field" id="ff-first"><label>First Name <span class="req">*</span></label><input type="text" name="first_name" placeholder="First"/><span class="field-error">Required</span></div>
-            <div class="form-field" id="ff-last"><label>Last Name <span class="req">*</span></label><input type="text" name="last_name" placeholder="Last"/><span class="field-error">Required</span></div>
+            <div class="form-field" id="ff-first"><label for="rsvp-first-name">First Name <span class="req" aria-hidden="true">*</span></label><input type="text" id="rsvp-first-name" name="first_name" placeholder="First" required aria-required="true" aria-describedby="err-first"/><span class="field-error" id="err-first">Required</span></div>
+            <div class="form-field" id="ff-last"><label for="rsvp-last-name">Last Name <span class="req" aria-hidden="true">*</span></label><input type="text" id="rsvp-last-name" name="last_name" placeholder="Last" required aria-required="true" aria-describedby="err-last"/><span class="field-error" id="err-last">Required</span></div>
           </div>
           <div class="form-row">
-            <div class="form-field" id="ff-email"><label>Email <span class="req">*</span></label><input type="email" name="email" placeholder="your@email.com"/><span class="field-error">Valid email required</span></div>
-            <div class="form-field" id="ff-phone"><label>Phone <span class="req">*</span></label><input type="tel" name="phone" placeholder="(555) 000-0000"/><span class="field-error">Required</span></div>
+            <div class="form-field" id="ff-email"><label for="rsvp-email">Email <span class="req" aria-hidden="true">*</span></label><input type="email" id="rsvp-email" name="email" placeholder="your@email.com" required aria-required="true" aria-describedby="err-email"/><span class="field-error" id="err-email">Valid email required</span></div>
+            <div class="form-field" id="ff-phone"><label for="rsvp-phone">Phone <span class="req" aria-hidden="true">*</span></label><input type="tel" id="rsvp-phone" name="phone" placeholder="(555) 000-0000" required aria-required="true" aria-describedby="err-phone"/><span class="field-error" id="err-phone">Required</span></div>
           </div>
           <div class="sms-optin-box">
             <input type="checkbox" id="sms-optin" name="sms_optin" value="Yes"/>
-            <label for="sms-optin" class="sms-optin-label"><strong>📱 Text me reunion alerts!</strong><span>I agree to receive text updates about the 2026 George Barnes Family Reunion. Msg &amp; data rates may apply. Reply STOP to opt out.</span></label>
+            <label for="sms-optin" class="sms-optin-label"><strong><span aria-hidden="true">📱</span> Text me reunion alerts!</strong><span>I agree to receive text updates about the 2026 George Barnes Family Reunion. Msg &amp; data rates may apply. Reply STOP to opt out.</span></label>
           </div>
           <div class="form-row">
-            <div class="form-field"><label>City</label><input type="text" name="city" placeholder="e.g. Greensboro"/></div>
-            <div class="form-field"><label>State</label><input type="text" name="state" placeholder="e.g. NC" maxlength="30"/></div>
+            <div class="form-field"><label for="rsvp-city">City</label><input type="text" id="rsvp-city" name="city" placeholder="e.g. Greensboro"/></div>
+            <div class="form-field"><label for="rsvp-state">State</label><input type="text" id="rsvp-state" name="state" placeholder="e.g. NC" maxlength="30"/></div>
           </div>
-          <div class="form-field">
-            <label>Attendance <span class="req">*</span></label>
+          <fieldset class="form-field" style="border:none;padding:0;">
+            <legend style="font-family:'Montserrat',sans-serif;font-size:0.62rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--text-lt);margin-bottom:0.3rem;">Attendance <span class="req" aria-hidden="true">*</span></legend>
             <div class="attend-toggle">
-              <label><input type="radio" name="attendance" value="Yes" checked/><span class="attend-option">Yes, I'll be there!</span></label>
+              <label><input type="radio" name="attendance" value="Yes" checked required/><span class="attend-option">Yes, I'll be there!</span></label>
               <label><input type="radio" name="attendance" value="Maybe"/><span class="attend-option">Maybe</span></label>
               <label><input type="radio" name="attendance" value="No"/><span class="attend-option">Can't make it this time</span></label>
             </div>
-          </div>
-          <div class="form-field" id="attending-days-field">
-            <label>Which days will you attend?</label>
+          </fieldset>
+          <fieldset class="form-field" id="attending-days-field" style="border:none;padding:0;">
+            <legend style="font-family:'Montserrat',sans-serif;font-size:0.62rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--text-lt);margin-bottom:0.3rem;">Which days will you attend?</legend>
             <div style="display:flex;flex-direction:column;gap:0.5rem;margin-top:0.3rem;">
               <label style="display:flex;align-items:center;gap:0.6rem;font-size:0.88rem;color:var(--text);cursor:pointer;font-weight:400;text-transform:none;letter-spacing:0;"><input type="checkbox" name="attending_friday" value="Yes" style="width:16px;height:16px;accent-color:var(--navy);"/> Friday, July 10 — Fish Fry, Movie &amp; Ice Cream Social</label>
               <label style="display:flex;align-items:center;gap:0.6rem;font-size:0.88rem;color:var(--text);cursor:pointer;font-weight:400;text-transform:none;letter-spacing:0;"><input type="checkbox" name="attending_saturday" value="Yes" style="width:16px;height:16px;accent-color:var(--navy);"/> Saturday, July 11 — Family Reunion</label>
             </div>
-          </div>
+          </fieldset>
         </div>
         <div class="form-card rsvp-attending-section" id="rsvp-guests-card">
           <div class="form-card-title"><span class="num">2</span> Additional Guests</div>
@@ -502,11 +514,11 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
         </div>
         <div class="form-card rsvp-attending-section" id="rsvp-dietary-card">
           <div class="form-card-title"><span class="num">4</span> Dietary Restrictions / Special Needs</div>
-          <div class="form-field"><textarea name="dietary" placeholder="e.g. gluten-free, nut allergy, wheelchair seating needed…"></textarea></div>
+          <div class="form-field"><label for="rsvp-dietary" class="sr-only">Dietary restrictions or special needs</label><textarea id="rsvp-dietary" name="dietary" placeholder="e.g. gluten-free, nut allergy, wheelchair seating needed…"></textarea></div>
         </div>
         <div class="form-card">
           <div class="form-card-title" id="rsvp-message-title"><span class="num">5</span> Message to the Family</div>
-          <div class="form-field"><textarea name="message" placeholder="Share a memory, a shoutout, or just say hello!"></textarea></div>
+          <div class="form-field"><label for="rsvp-message" class="sr-only">Message to the family</label><textarea id="rsvp-message" name="message" placeholder="Share a memory, a shoutout, or just say hello!"></textarea></div>
         </div>
         <button type="submit" class="rsvp-submit" id="rsvp-submit-btn">Send My RSVP ✦</button>
       </div>
@@ -533,16 +545,16 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
         <div id="photo-upload-section" style="display:none;margin-top:1.5rem;">
           <form id="photo-upload-form" class="photo-upload-form">
             <div class="form-field">
-              <label>Your Name <span class="req">*</span></label>
-              <input type="text" name="submitter_name" placeholder="First Last" required/>
+              <label for="photo-submitter-name">Your Name <span class="req" aria-hidden="true">*</span></label>
+              <input type="text" id="photo-submitter-name" name="submitter_name" placeholder="First Last" required aria-required="true"/>
             </div>
             <div class="form-field">
-              <label>Email <span class="req">*</span></label>
-              <input type="email" name="submitter_email" placeholder="your@email.com" required/>
+              <label for="photo-submitter-email">Email <span class="req" aria-hidden="true">*</span></label>
+              <input type="email" id="photo-submitter-email" name="submitter_email" placeholder="your@email.com" required aria-required="true"/>
             </div>
             <div class="form-field">
-              <label>Photos <span class="req">*</span> <span style="font-weight:400;text-transform:none;letter-spacing:0;font-size:0.7rem;color:var(--text-lt);">(up to 5)</span></label>
-              <div class="photo-upload-dropzone" id="photo-dropzone">
+              <label for="photo-file-input">Photos <span class="req" aria-hidden="true">*</span> <span style="font-weight:400;text-transform:none;letter-spacing:0;font-size:0.7rem;color:var(--text-lt);">(up to 5)</span></label>
+              <div class="photo-upload-dropzone" id="photo-dropzone" role="button" tabindex="0" aria-label="Click or drop photos to upload">
                 <p>Drag &amp; drop photos here, or <span class="browse-link">browse</span></p>
                 <p style="font-size:0.72rem;color:var(--text-lt);margin:0;">JPG, PNG — max 10 MB each</p>
                 <input type="file" id="photo-file-input" name="photo" accept="image/jpeg,image/png" multiple style="display:none;"/>
@@ -555,7 +567,7 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
             </div>
             <button type="submit" class="btn-gallery-submit" style="width:100%;margin-top:0.5rem;">Upload Photo</button>
           </form>
-          <div id="photo-upload-success" style="display:none;text-align:center;padding:2rem 0;">
+          <div id="photo-upload-success" style="display:none;text-align:center;padding:2rem 0;" role="status" aria-live="polite">
             <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--navy);margin-bottom:0.5rem;">Photos Submitted!</h3>
             <p style="font-size:0.88rem;color:var(--text-lt);">Thanks for sharing! Your photos will appear in the gallery once they've been reviewed.</p>
           </div>
@@ -573,13 +585,15 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
       <h2 class="section-h2">Questions? <em>We're Here.</em></h2>
     </div>
     <div class="contact-card">
-      <span class="contact-icon">&#9993;</span>
+      <span class="contact-icon" aria-hidden="true">&#9993;</span>
       <h3>George Barnes Family Reunion Committee</h3>
       <p>Have a question about the reunion, need help with your RSVP, or just want to say hello? Drop us a line and we'll get back to you.</p>
       <a class="contact-email" href="mailto:g.barnes.family@gmail.com?subject=Reunion%20Question%20Form">Email Us</a>
     </div>
   </div>
 </section>
+
+</main>
 
 <!-- FOOTER -->
 <footer id="main-footer" style="display:none;">
@@ -593,7 +607,7 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
   <p class="footer-copy">© 2026 George Barnes Family Reunion Committee</p>
 </footer>
 
-<button id="admin-toggle-btn" onclick="toggleAdminPanel()">⚙ Admin</button>
+<button id="admin-toggle-btn" onclick="toggleAdminPanel()" aria-label="Admin panel" type="button"><span aria-hidden="true">⚙</span> Admin</button>
 <div id="admin-panel">
   <h4>Page Visibility</h4>
   <div id="admin-login-form">
@@ -617,10 +631,10 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
 </div>
 
 <!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
-  <button class="lightbox-close" onclick="closeLightbox(event)">&times;</button>
-  <button class="lightbox-nav lightbox-prev" onclick="lightboxNav(event,-1)">&#8592;</button>
-  <button class="lightbox-nav lightbox-next" onclick="lightboxNav(event,1)">&#8594;</button>
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button class="lightbox-close" onclick="closeLightbox(event)" aria-label="Close" type="button">&times;</button>
+  <button class="lightbox-nav lightbox-prev" onclick="lightboxNav(event,-1)" aria-label="Previous photo" type="button">&#8592;</button>
+  <button class="lightbox-nav lightbox-next" onclick="lightboxNav(event,1)" aria-label="Next photo" type="button">&#8594;</button>
   <img id="lightbox-img" src="" alt=""/>
   <div class="lightbox-caption" id="lightbox-caption"></div>
 </div>
@@ -646,13 +660,13 @@ function adminLogin(){const pw=document.getElementById('admin-pw').value,err=doc
 function syncAdminToggles(){document.querySelectorAll('#admin-controls input[type="checkbox"]').forEach(cb=>{cb.checked=!!visibility[cb.dataset.section];});}
 function adminToggle(cb){visibility[cb.dataset.section]=cb.checked;applyVisibility();}
 function adminSave(){localStorage.setItem('barnes_visibility',JSON.stringify(visibility));const btn=document.getElementById('admin-save-btn');btn.textContent='✓ Saved!';btn.style.background='var(--navy)';setTimeout(()=>{btn.textContent='Save & Publish Changes';btn.style.background='';},2000);}
-function toggleMenu(){document.getElementById('nav-links').classList.toggle('open');}
+function toggleMenu(){const nl=document.getElementById('nav-links');const open=nl.classList.toggle('open');document.getElementById('hamburger').setAttribute('aria-expanded',open?'true':'false');}
 function updateCountdown(){const diff=new Date('2026-07-10T18:00:00')-new Date();if(diff<=0){['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id=>document.getElementById(id).textContent='0');return;}document.getElementById('cd-days').textContent=String(Math.floor(diff/86400000)).padStart(3,'0');document.getElementById('cd-hours').textContent=String(Math.floor((diff%86400000)/3600000)).padStart(2,'0');document.getElementById('cd-mins').textContent=String(Math.floor((diff%3600000)/60000)).padStart(2,'0');document.getElementById('cd-secs').textContent=String(Math.floor((diff%60000)/1000)).padStart(2,'0');}
 function changeGuests(delta){const n=guestCount+delta;if(n<0||n>10)return;delta>0?addGuestCard(n):removeLastGuest();guestCount=n;document.getElementById('guest-count').textContent=guestCount;document.getElementById('guest-dec').disabled=guestCount===0;document.getElementById('guest-inc').disabled=guestCount===10;}
 function addGuestCard(n){const list=document.getElementById('guest-list'),card=document.createElement('div');card.className='guest-card';card.dataset.n=n;card.innerHTML=`<div class="guest-card-head"><span class="guest-card-title">Guest ${n}</span><button type="button" class="remove-guest" onclick="removeGuest(${n})">✕</button></div><div class="form-row"><div class="form-field" id="gf-name-${n}"><label>Full Name <span class="req">*</span></label><input type="text" name="guest_${n}_name" placeholder="First Last"/><span class="field-error">Required</span></div><div class="form-field"><label>Age 13 or under?</label><select name="guest_${n}_child"><option value="">— Select —</option><option>No</option><option>Yes</option></select></div></div>`;list.appendChild(card);}
 function removeLastGuest(){const cards=document.getElementById('guest-list').querySelectorAll('.guest-card');if(cards.length)cards[cards.length-1].remove();}
 function removeGuest(n){document.querySelector(`.guest-card[data-n="${n}"]`)?.remove();guestCount--;document.getElementById('guest-count').textContent=guestCount;document.getElementById('guest-dec').disabled=guestCount===0;document.getElementById('guest-inc').disabled=guestCount===10;document.querySelectorAll('.guest-card').forEach((c,i)=>c.querySelector('.guest-card-title').textContent=`Guest ${i+1}`);}
-document.getElementById('rsvp-form').addEventListener('submit',async function(e){e.preventDefault();let valid=true;[{id:'ff-first',field:'first_name',type:'text'},{id:'ff-last',field:'last_name',type:'text'},{id:'ff-email',field:'email',type:'email'},{id:'ff-phone',field:'phone',type:'text'}].forEach(r=>{const el=this.querySelector(`[name="${r.field}"]`),wrap=document.getElementById(r.id);let ok=el.value.trim()!=='';if(r.type==='email')ok=ok&&/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value);wrap.classList.toggle('has-error',!ok);if(!ok)valid=false;});document.querySelectorAll('.guest-card').forEach(card=>{const n=card.dataset.n,nameEl=card.querySelector(`[name="guest_${n}_name"]`),wrap=document.getElementById(`gf-name-${n}`);if(nameEl&&wrap){const ok=nameEl.value.trim()!=='';wrap.classList.toggle('has-error',!ok);if(!ok)valid=false;}});if(!valid){document.querySelector('.has-error')?.scrollIntoView({behavior:'smooth',block:'center'});return;}const btn=this.querySelector('.rsvp-submit');btn.textContent='Sending…';btn.disabled=true;const guestParts=[];document.querySelectorAll('.guest-card').forEach(card=>{const n=card.dataset.n,name=card.querySelector(`[name="guest_${n}_name"]`)?.value||'',child=card.querySelector(`[name="guest_${n}_child"]`)?.value||'';if(name)guestParts.push(name+(child==='Yes'?' (child)':''));});const params=new URLSearchParams({first_name:this.querySelector('[name="first_name"]').value,last_name:this.querySelector('[name="last_name"]').value,email:this.querySelector('[name="email"]').value,phone:this.querySelector('[name="phone"]').value,sms_optin:this.querySelector('[name="sms_optin"]')?.checked?'Yes':'No',city:this.querySelector('[name="city"]').value,state:this.querySelector('[name="state"]').value,attendance:this.querySelector('[name="attendance"]:checked')?.value||'',attending_friday:this.querySelector('[name="attending_friday"]')?.checked?'Yes':'No',attending_saturday:this.querySelector('[name="attending_saturday"]')?.checked?'Yes':'No',guest_count:String(guestCount),total_registrants:String(this.querySelector('[name="attendance"]:checked')?.value==='Yes'?1+guestCount:0),guests:guestParts.join(' | '),committees:[...this.querySelectorAll('[name="committee"]:checked')].map(c=>c.value).join(' | '),dietary:this.querySelector('[name="dietary"]').value,message:this.querySelector('[name="message"]').value});const att=this.querySelector('[name="attendance"]:checked')?.value||'';try{await fetch(this.action,{method:'POST',body:params,headers:{'Content-Type':'application/x-www-form-urlencoded'},mode:'no-cors'});this.style.display='none';document.getElementById('rsvp-intro').style.display='none';const st=document.getElementById('rsvp-success-title'),sm=document.getElementById('rsvp-success-msg');if(att==='Yes'){st.textContent="You're on the List!";sm.textContent="Your RSVP has been received. We'll be in touch with more details soon. Can't wait to see you \u2014 July 10\u201311 in Erwin, NC!";}else if(att==='Maybe'){st.textContent='Thanks for Letting Us Know!';sm.textContent="We hope you can make it! We'll keep you in the loop with updates. If your plans change, just let us know.";}else{st.textContent='We\u2019ll Miss You!';sm.textContent="Thanks for letting us know. We\u2019re sorry you can\u2019t make it this year, but we hope to see you at a future reunion. Stay connected!";}document.getElementById('rsvp-success').style.display='block';window.scrollTo({top:document.getElementById('rsvp').offsetTop-80,behavior:'smooth'});}catch(err){btn.textContent='Send My RSVP ✦';btn.disabled=false;alert('Something went wrong. Please try again.');}}); 
+document.getElementById('rsvp-form').addEventListener('submit',async function(e){e.preventDefault();let valid=true;[{id:'ff-first',field:'first_name',type:'text'},{id:'ff-last',field:'last_name',type:'text'},{id:'ff-email',field:'email',type:'email'},{id:'ff-phone',field:'phone',type:'text'}].forEach(r=>{const el=this.querySelector(`[name="${r.field}"]`),wrap=document.getElementById(r.id);let ok=el.value.trim()!=='';if(r.type==='email')ok=ok&&/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value);wrap.classList.toggle('has-error',!ok);el.setAttribute('aria-invalid',!ok?'true':'false');if(!ok)valid=false;});document.querySelectorAll('.guest-card').forEach(card=>{const n=card.dataset.n,nameEl=card.querySelector(`[name="guest_${n}_name"]`),wrap=document.getElementById(`gf-name-${n}`);if(nameEl&&wrap){const ok=nameEl.value.trim()!=='';wrap.classList.toggle('has-error',!ok);nameEl.setAttribute('aria-invalid',!ok?'true':'false');if(!ok)valid=false;}});if(!valid){document.querySelector('.has-error')?.scrollIntoView({behavior:'smooth',block:'center'});return;}const btn=this.querySelector('.rsvp-submit');btn.textContent='Sending…';btn.disabled=true;const guestParts=[];document.querySelectorAll('.guest-card').forEach(card=>{const n=card.dataset.n,name=card.querySelector(`[name="guest_${n}_name"]`)?.value||'',child=card.querySelector(`[name="guest_${n}_child"]`)?.value||'';if(name)guestParts.push(name+(child==='Yes'?' (child)':''));});const params=new URLSearchParams({first_name:this.querySelector('[name="first_name"]').value,last_name:this.querySelector('[name="last_name"]').value,email:this.querySelector('[name="email"]').value,phone:this.querySelector('[name="phone"]').value,sms_optin:this.querySelector('[name="sms_optin"]')?.checked?'Yes':'No',city:this.querySelector('[name="city"]').value,state:this.querySelector('[name="state"]').value,attendance:this.querySelector('[name="attendance"]:checked')?.value||'',attending_friday:this.querySelector('[name="attending_friday"]')?.checked?'Yes':'No',attending_saturday:this.querySelector('[name="attending_saturday"]')?.checked?'Yes':'No',guest_count:String(guestCount),total_registrants:String(this.querySelector('[name="attendance"]:checked')?.value==='Yes'?1+guestCount:0),guests:guestParts.join(' | '),committees:[...this.querySelectorAll('[name="committee"]:checked')].map(c=>c.value).join(' | '),dietary:this.querySelector('[name="dietary"]').value,message:this.querySelector('[name="message"]').value});const att=this.querySelector('[name="attendance"]:checked')?.value||'';try{await fetch(this.action,{method:'POST',body:params,headers:{'Content-Type':'application/x-www-form-urlencoded'},mode:'no-cors'});this.style.display='none';document.getElementById('rsvp-intro').style.display='none';const st=document.getElementById('rsvp-success-title'),sm=document.getElementById('rsvp-success-msg');if(att==='Yes'){st.textContent="You're on the List!";sm.textContent="Your RSVP has been received. We'll be in touch with more details soon. Can't wait to see you \u2014 July 10\u201311 in Erwin, NC!";}else if(att==='Maybe'){st.textContent='Thanks for Letting Us Know!';sm.textContent="We hope you can make it! We'll keep you in the loop with updates. If your plans change, just let us know.";}else{st.textContent='We\u2019ll Miss You!';sm.textContent="Thanks for letting us know. We\u2019re sorry you can\u2019t make it this year, but we hope to see you at a future reunion. Stay connected!";}document.getElementById('rsvp-success').style.display='block';window.scrollTo({top:document.getElementById('rsvp').offsetTop-80,behavior:'smooth'});}catch(err){btn.textContent='Send My RSVP ✦';btn.disabled=false;alert('Something went wrong. Please try again.');}}); 
 init();
 
 // ── RSVP attendance toggle ──
@@ -728,6 +742,7 @@ init();
   if (!dropzone) return;
 
   dropzone.addEventListener('click', () => fileInput.click());
+  dropzone.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fileInput.click(); } });
   dropzone.addEventListener('dragover', e => { e.preventDefault(); dropzone.classList.add('dragover'); });
   dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragover'));
   dropzone.addEventListener('drop', e => {
@@ -855,7 +870,9 @@ init();
 
   function openLightbox(src, caption){
     const lb = document.getElementById('lightbox');
-    document.getElementById('lightbox-img').src = src;
+    const img = document.getElementById('lightbox-img');
+    img.src = src;
+    img.alt = caption || 'Family photo';
     document.getElementById('lightbox-caption').textContent = caption;
     lb.classList.add('open');
     document.body.style.overflow = 'hidden';
@@ -873,8 +890,11 @@ init();
     lightboxIndex = Math.max(0, Math.min(lightboxIndex + dir, slides.length - 1));
     const slide = slides[lightboxIndex];
     const img = slide.querySelector('img');
-    document.getElementById('lightbox-img').src = img.src;
-    document.getElementById('lightbox-caption').textContent = slide.querySelector('.carousel-caption')?.textContent || '';
+    const caption = slide.querySelector('.carousel-caption')?.textContent || '';
+    const lbImg = document.getElementById('lightbox-img');
+    lbImg.src = img.src;
+    lbImg.alt = caption || 'Family photo';
+    document.getElementById('lightbox-caption').textContent = caption;
   };
 
   document.addEventListener('keydown', function(e){
