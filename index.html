@@ -254,6 +254,39 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:ce
 .contact-card a.contact-email{display:inline-block;background:var(--navy);color:#fff;font-family:'Montserrat',sans-serif;font-size:0.68rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;padding:0.75rem 1.8rem;border-radius:2px;text-decoration:none;transition:all 0.25s;}
 .contact-card a.contact-email:hover{background:var(--navy-lt);transform:translateY(-2px);}
 
+/* FAMILY HISTORY */
+#history{padding:5.5rem 2rem;background:var(--white);}
+.history-lock{max-width:460px;margin:2rem auto 0;background:var(--cream);border:1px solid var(--border);border-top:3px solid var(--gold);border-radius:2px;padding:2rem;text-align:center;}
+.history-lock .lock-icon{font-size:1.8rem;margin-bottom:0.75rem;display:block;color:var(--gold-dk);}
+.history-lock p{font-size:0.88rem;color:var(--text-lt);line-height:1.7;margin-bottom:1rem;}
+.history-lock input{background:var(--white);border:1px solid var(--border);border-radius:2px;padding:0.7rem 0.9rem;font-family:'Lato',sans-serif;font-size:0.92rem;color:var(--text);width:100%;margin-bottom:0.75rem;text-align:center;letter-spacing:0.05em;}
+.history-lock input:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 3px rgba(26,61,80,0.1);}
+.history-lock button{width:100%;padding:0.75rem;background:var(--navy);color:#fff;border:none;border-radius:2px;font-family:'Montserrat',sans-serif;font-size:0.68rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;cursor:pointer;transition:background 0.2s;}
+.history-lock button:hover{background:var(--navy-lt);}
+.history-lock .lock-error{color:var(--orange);font-size:0.78rem;margin-top:0.5rem;display:none;}
+.history-lock .lock-error.show{display:block;}
+.history-unlocked{display:none;max-width:680px;margin:2rem auto 0;}
+.history-unlocked.open{display:block;}
+.history-card{background:var(--cream);border:1px solid var(--border);border-top:3px solid var(--gold);border-radius:2px;padding:2rem;text-align:center;margin-bottom:2rem;}
+.history-card h3{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:var(--navy);margin-bottom:0.5rem;}
+.history-card p{font-size:0.88rem;color:var(--text-lt);line-height:1.7;margin-bottom:1.25rem;}
+.history-card a.history-link{display:inline-block;background:var(--navy);color:#fff;font-family:'Montserrat',sans-serif;font-size:0.68rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;padding:0.85rem 2rem;border-radius:2px;text-decoration:none;transition:all 0.25s;}
+.history-card a.history-link:hover{background:var(--navy-lt);transform:translateY(-2px);}
+.history-card .history-pw-note{font-size:0.75rem;color:var(--text-lt);font-style:italic;margin-top:0.8rem;}
+.history-edit-form{background:var(--white);border:1px solid var(--border);border-radius:2px;padding:2rem;}
+.history-edit-form h3{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:700;color:var(--navy);margin-bottom:0.4rem;}
+.history-edit-form p.sub{font-size:0.82rem;color:var(--text-lt);line-height:1.6;margin-bottom:1.25rem;}
+.history-edit-form .form-field{display:flex;flex-direction:column;gap:0.3rem;margin-bottom:1rem;}
+.history-edit-form label{font-family:'Montserrat',sans-serif;font-size:0.62rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--text-lt);}
+.history-edit-form input,.history-edit-form select,.history-edit-form textarea{background:var(--cream);border:1px solid var(--border);border-radius:2px;padding:0.6rem 0.8rem;font-family:'Lato',sans-serif;font-size:0.88rem;color:var(--text);width:100%;transition:border-color 0.2s;}
+.history-edit-form input:focus,.history-edit-form select:focus,.history-edit-form textarea:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 3px rgba(26,61,80,0.1);}
+.history-edit-form textarea{resize:vertical;min-height:90px;}
+.history-edit-form button[type="submit"]{width:100%;padding:0.85rem;background:var(--orange);color:#fff;border:none;border-radius:2px;font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;cursor:pointer;transition:background 0.2s;}
+.history-edit-form button[type="submit"]:hover{background:var(--orange-lt);}
+#history-edit-success{display:none;text-align:center;padding:1.5rem 0;}
+#history-edit-success h4{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--navy);margin-bottom:0.5rem;}
+#history-edit-success p{font-size:0.85rem;color:var(--text-lt);}
+
 /* FOOTER */
 footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2rem;text-align:center;}
 .footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;color:var(--gold);margin-bottom:0.25rem;}
@@ -308,6 +341,7 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
     <li id="nav-details" class="hidden-page"><a href="#details">Details</a></li>
     <li id="nav-legacy" class="hidden-page"><a href="#legacy">Our Legacy</a></li>
     <li id="nav-gallery" class="hidden-page"><a href="#gallery">Gallery</a></li>
+    <li id="nav-history" class="hidden-page"><a href="#history">Family History</a></li>
     <li id="nav-contact" class="hidden-page"><a href="#contact">Contact</a></li>
     <li id="nav-rsvp" class="hidden-page"><a href="#rsvp" class="rsvp-link">RSVP</a></li>
   </ul>
@@ -593,6 +627,72 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
   </div>
 </section>
 
+<!-- FAMILY HISTORY -->
+<section class="site-section" id="history">
+  <div class="section-wrap">
+    <div class="section-header">
+      <span class="section-eye">Family History</span>
+      <h2 class="section-h2">Our <em>Story Book</em></h2>
+      <p class="section-sub">A digital flipbook with family history, memories, and photos from across the generations.</p>
+    </div>
+
+    <div class="history-lock" id="history-lock">
+      <span class="lock-icon" aria-hidden="true">&#128274;</span>
+      <p>This section is for family only. Please enter the password to continue.</p>
+      <label for="history-pw" class="sr-only">Password</label>
+      <input type="password" id="history-pw" placeholder="Password" onkeydown="if(event.key==='Enter')historyUnlock()"/>
+      <button type="button" onclick="historyUnlock()">Unlock</button>
+      <span class="lock-error" id="history-lock-error">Incorrect password</span>
+    </div>
+
+    <div class="history-unlocked" id="history-unlocked">
+      <div class="history-card">
+        <h3>Family History Flipbook</h3>
+        <p>Explore our family's story — photos, memories, and milestones from across the generations.</p>
+        <a class="history-link" href="https://gbarnesfamily.github.io/family-history/" target="_blank" rel="noopener">Open the Flipbook</a>
+        <p class="history-pw-note">Note: The flipbook has its own password. Use: <strong>barnes2026</strong></p>
+      </div>
+
+      <form class="history-edit-form" id="history-edit-form">
+        <h3>Request an Edit or Addition</h3>
+        <p class="sub">See something that should be updated? Have a photo or memory to add? Let us know and we'll review.</p>
+        <div class="form-field">
+          <label for="he-name">Your Name <span class="req" aria-hidden="true">*</span></label>
+          <input type="text" id="he-name" name="name" placeholder="First Last" required aria-required="true"/>
+        </div>
+        <div class="form-field">
+          <label for="he-email">Email <span class="req" aria-hidden="true">*</span></label>
+          <input type="email" id="he-email" name="email" placeholder="your@email.com" required aria-required="true"/>
+        </div>
+        <div class="form-field">
+          <label for="he-section">Page or Section</label>
+          <input type="text" id="he-section" name="section" placeholder="e.g. 'Sanders branch' or 'page 5'"/>
+        </div>
+        <div class="form-field">
+          <label for="he-type">Type of Change</label>
+          <select id="he-type" name="type">
+            <option>Text correction</option>
+            <option>Date change</option>
+            <option>Photo to add</option>
+            <option>New information</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label for="he-details">Details <span class="req" aria-hidden="true">*</span></label>
+          <textarea id="he-details" name="details" placeholder="Please describe the change or addition you'd like to suggest…" required aria-required="true"></textarea>
+        </div>
+        <button type="submit">Submit Request</button>
+      </form>
+
+      <div id="history-edit-success" role="status" aria-live="polite">
+        <h4>Thanks for your submission!</h4>
+        <p>We've received your request and will review it soon.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 </main>
 
 <!-- FOOTER -->
@@ -602,7 +702,7 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
   <ul class="footer-links">
     <li><a href="#home">Home</a></li><li><a href="#details">Details</a></li>
     <li><a href="#schedule">Schedule</a></li><li><a href="#legacy">Our Legacy</a></li>
-    <li><a href="#gallery">Gallery</a></li><li><a href="#contact">Contact</a></li><li><a href="#rsvp">RSVP</a></li>
+    <li><a href="#gallery">Gallery</a></li><li><a href="#history">Family History</a></li><li><a href="#contact">Contact</a></li><li><a href="#rsvp">RSVP</a></li>
   </ul>
   <p class="footer-copy">© 2026 George Barnes Family Reunion Committee</p>
 </footer>
@@ -626,6 +726,7 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
     <div class="admin-row"><span class="admin-row-label">RSVP / Registration</span><label class="toggle-switch"><input type="checkbox" data-section="rsvp" onchange="adminToggle(this)"/><span class="toggle-slider"></span></label></div>
     <div class="admin-row"><span class="admin-row-label">Photo Gallery</span><label class="toggle-switch"><input type="checkbox" data-section="gallery" onchange="adminToggle(this)"/><span class="toggle-slider"></span></label></div>
     <div class="admin-row"><span class="admin-row-label">Contact</span><label class="toggle-switch"><input type="checkbox" data-section="contact" onchange="adminToggle(this)"/><span class="toggle-slider"></span></label></div>
+    <div class="admin-row"><span class="admin-row-label">Family History</span><label class="toggle-switch"><input type="checkbox" data-section="history" onchange="adminToggle(this)"/><span class="toggle-slider"></span></label></div>
     <button id="admin-save-btn" onclick="adminSave()">Save &amp; Publish Changes</button>
   </div>
 </div>
@@ -641,7 +742,7 @@ footer{background:var(--navy);border-top:3px solid var(--gold);padding:2.5rem 2r
 
 <script>
 const ADMIN_PASSWORD='Reunion2026';
-const DEFAULT_VISIBILITY={home:true,countdown:false,details:true,schedule:true,legacy:true,rsvp:true,gallery:true,contact:true};
+const DEFAULT_VISIBILITY={home:true,countdown:false,details:true,schedule:true,legacy:true,rsvp:true,gallery:true,contact:true,history:true};
 let visibility={},adminUnlocked=false,guestCount=0;
 function init(){
   // Only show admin button if ?admin=true is in the URL
@@ -654,7 +755,7 @@ function init(){
   updateCountdown();
   setInterval(updateCountdown,1000);
 }
-function applyVisibility(){const secs=['home','countdown','details','schedule','legacy','rsvp','gallery','contact'];const any=secs.some(s=>visibility[s]);const ov=document.getElementById('coming-soon'),nv=document.getElementById('main-nav'),ft=document.getElementById('main-footer');if(!any){ov.classList.remove('hidden');nv.style.display='none';ft.style.display='none';}else{ov.classList.add('hidden');nv.style.display='flex';ft.style.display='block';}secs.forEach(id=>{const el=document.getElementById(id);if(!el)return;visibility[id]?el.classList.add('visible'):el.classList.remove('visible');const ni=document.getElementById('nav-'+id);if(ni)ni.classList.toggle('hidden-page',!visibility[id]);});const rb=document.getElementById('hero-rsvp-btn'),db=document.getElementById('hero-details-btn');if(rb)rb.style.display=visibility.rsvp?'inline-block':'none';if(db)db.style.display=visibility.details?'inline-block':'none';if(adminUnlocked)syncAdminToggles();}
+function applyVisibility(){const secs=['home','countdown','details','schedule','legacy','rsvp','gallery','contact','history'];const any=secs.some(s=>visibility[s]);const ov=document.getElementById('coming-soon'),nv=document.getElementById('main-nav'),ft=document.getElementById('main-footer');if(!any){ov.classList.remove('hidden');nv.style.display='none';ft.style.display='none';}else{ov.classList.add('hidden');nv.style.display='flex';ft.style.display='block';}secs.forEach(id=>{const el=document.getElementById(id);if(!el)return;visibility[id]?el.classList.add('visible'):el.classList.remove('visible');const ni=document.getElementById('nav-'+id);if(ni)ni.classList.toggle('hidden-page',!visibility[id]);});const rb=document.getElementById('hero-rsvp-btn'),db=document.getElementById('hero-details-btn');if(rb)rb.style.display=visibility.rsvp?'inline-block':'none';if(db)db.style.display=visibility.details?'inline-block':'none';if(adminUnlocked)syncAdminToggles();}
 function toggleAdminPanel(){document.getElementById('admin-panel').classList.toggle('open');}
 function adminLogin(){const pw=document.getElementById('admin-pw').value,err=document.getElementById('admin-error');if(pw===ADMIN_PASSWORD){adminUnlocked=true;document.getElementById('admin-login-form').style.display='none';document.getElementById('admin-controls').style.display='block';syncAdminToggles();err.style.display='none';}else{err.style.display='block';document.getElementById('admin-pw').value='';}}
 function syncAdminToggles(){document.querySelectorAll('#admin-controls input[type="checkbox"]').forEach(cb=>{cb.checked=!!visibility[cb.dataset.section];});}
@@ -668,6 +769,65 @@ function removeLastGuest(){const cards=document.getElementById('guest-list').que
 function removeGuest(n){document.querySelector(`.guest-card[data-n="${n}"]`)?.remove();guestCount--;document.getElementById('guest-count').textContent=guestCount;document.getElementById('guest-dec').disabled=guestCount===0;document.getElementById('guest-inc').disabled=guestCount===10;document.querySelectorAll('.guest-card').forEach((c,i)=>c.querySelector('.guest-card-title').textContent=`Guest ${i+1}`);}
 document.getElementById('rsvp-form').addEventListener('submit',async function(e){e.preventDefault();let valid=true;[{id:'ff-first',field:'first_name',type:'text'},{id:'ff-last',field:'last_name',type:'text'},{id:'ff-email',field:'email',type:'email'},{id:'ff-phone',field:'phone',type:'text'}].forEach(r=>{const el=this.querySelector(`[name="${r.field}"]`),wrap=document.getElementById(r.id);let ok=el.value.trim()!=='';if(r.type==='email')ok=ok&&/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value);wrap.classList.toggle('has-error',!ok);el.setAttribute('aria-invalid',!ok?'true':'false');if(!ok)valid=false;});document.querySelectorAll('.guest-card').forEach(card=>{const n=card.dataset.n,nameEl=card.querySelector(`[name="guest_${n}_name"]`),wrap=document.getElementById(`gf-name-${n}`);if(nameEl&&wrap){const ok=nameEl.value.trim()!=='';wrap.classList.toggle('has-error',!ok);nameEl.setAttribute('aria-invalid',!ok?'true':'false');if(!ok)valid=false;}});if(!valid){document.querySelector('.has-error')?.scrollIntoView({behavior:'smooth',block:'center'});return;}const btn=this.querySelector('.rsvp-submit');btn.textContent='Sending…';btn.disabled=true;const guestParts=[];document.querySelectorAll('.guest-card').forEach(card=>{const n=card.dataset.n,name=card.querySelector(`[name="guest_${n}_name"]`)?.value||'',child=card.querySelector(`[name="guest_${n}_child"]`)?.value||'';if(name)guestParts.push(name+(child==='Yes'?' (child)':''));});const params=new URLSearchParams({first_name:this.querySelector('[name="first_name"]').value,last_name:this.querySelector('[name="last_name"]').value,email:this.querySelector('[name="email"]').value,phone:this.querySelector('[name="phone"]').value,sms_optin:this.querySelector('[name="sms_optin"]')?.checked?'Yes':'No',city:this.querySelector('[name="city"]').value,state:this.querySelector('[name="state"]').value,attendance:this.querySelector('[name="attendance"]:checked')?.value||'',attending_friday:this.querySelector('[name="attending_friday"]')?.checked?'Yes':'No',attending_saturday:this.querySelector('[name="attending_saturday"]')?.checked?'Yes':'No',guest_count:String(guestCount),total_registrants:String(this.querySelector('[name="attendance"]:checked')?.value==='Yes'?1+guestCount:0),guests:guestParts.join(' | '),committees:[...this.querySelectorAll('[name="committee"]:checked')].map(c=>c.value).join(' | '),dietary:this.querySelector('[name="dietary"]').value,message:this.querySelector('[name="message"]').value});const att=this.querySelector('[name="attendance"]:checked')?.value||'';try{await fetch(this.action,{method:'POST',body:params,headers:{'Content-Type':'application/x-www-form-urlencoded'},mode:'no-cors'});this.style.display='none';document.getElementById('rsvp-intro').style.display='none';const st=document.getElementById('rsvp-success-title'),sm=document.getElementById('rsvp-success-msg');if(att==='Yes'){st.textContent="You're on the List!";sm.textContent="Your RSVP has been received. We'll be in touch with more details soon. Can't wait to see you \u2014 July 10\u201311 in Erwin, NC!";}else if(att==='Maybe'){st.textContent='Thanks for Letting Us Know!';sm.textContent="We hope you can make it! We'll keep you in the loop with updates. If your plans change, just let us know.";}else{st.textContent='We\u2019ll Miss You!';sm.textContent="Thanks for letting us know. We\u2019re sorry you can\u2019t make it this year, but we hope to see you at a future reunion. Stay connected!";}document.getElementById('rsvp-success').style.display='block';window.scrollTo({top:document.getElementById('rsvp').offsetTop-80,behavior:'smooth'});}catch(err){btn.textContent='Send My RSVP ✦';btn.disabled=false;alert('Something went wrong. Please try again.');}}); 
 init();
+
+// ── Family History lock ──
+const HISTORY_PASSWORD = 'barnes2026';
+const HISTORY_EDIT_URL = ''; // Set to your Apps Script URL when ready
+
+function historyUnlock(){
+  const pwEl = document.getElementById('history-pw');
+  const err = document.getElementById('history-lock-error');
+  if (pwEl.value === HISTORY_PASSWORD){
+    document.getElementById('history-lock').style.display = 'none';
+    document.getElementById('history-unlocked').classList.add('open');
+    try { sessionStorage.setItem('history_unlocked', '1'); } catch(e){}
+    err.classList.remove('show');
+  } else {
+    err.classList.add('show');
+    pwEl.value = '';
+  }
+}
+
+(function(){
+  try { if (sessionStorage.getItem('history_unlocked') === '1'){
+    const lock = document.getElementById('history-lock');
+    const open = document.getElementById('history-unlocked');
+    if (lock) lock.style.display = 'none';
+    if (open) open.classList.add('open');
+  } } catch(e){}
+})();
+
+const heForm = document.getElementById('history-edit-form');
+if (heForm) {
+  heForm.addEventListener('submit', async function(e){
+    e.preventDefault();
+    const name = this.querySelector('[name="name"]').value.trim();
+    const email = this.querySelector('[name="email"]').value.trim();
+    const details = this.querySelector('[name="details"]').value.trim();
+    if (!name || !email || !details) { alert('Please fill in all required fields.'); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { alert('Please enter a valid email address.'); return; }
+    if (!HISTORY_EDIT_URL) { alert('Submission is not configured yet. Please email g.barnes.family@gmail.com directly.'); return; }
+    const btn = this.querySelector('[type="submit"]');
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    const params = new URLSearchParams({
+      name: name,
+      email: email,
+      section: this.querySelector('[name="section"]').value,
+      type: this.querySelector('[name="type"]').value,
+      details: details
+    });
+    try {
+      await fetch(HISTORY_EDIT_URL, { method:'POST', body:params, headers:{'Content-Type':'application/x-www-form-urlencoded'}, mode:'no-cors' });
+      this.style.display = 'none';
+      document.getElementById('history-edit-success').style.display = 'block';
+    } catch(err) {
+      btn.disabled = false;
+      btn.textContent = 'Submit Request';
+      alert('Something went wrong. Please try again.');
+    }
+  });
+}
 
 // ── RSVP attendance toggle ──
 (function(){
