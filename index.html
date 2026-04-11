@@ -716,7 +716,7 @@ init();
           item.className = 'gallery-item carousel-slide';
           item.innerHTML =
             '<img src="' + p.url + '" alt="' + (p.caption || 'Family Photo') + '"/>' +
-            '<div class="gallery-caption carousel-caption">' + (p.caption || '') + (p.submitted_by ? '<br/>Photo by ' + p.submitted_by : '') + '</div>';
+            '<div class="gallery-caption carousel-caption">' + (p.caption || '') + (p.submitted_by ? '<br/>Submitted by ' + p.submitted_by : '') + '</div>';
           grid.appendChild(item);
         });
       })
